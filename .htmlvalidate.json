@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "no-autoplay": "off",
+    "tel-non-breaking": "off"
+  }
+}

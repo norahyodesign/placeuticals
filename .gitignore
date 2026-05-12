@@ -1,0 +1,9 @@
+# Claude AI worktrees
+.claude/
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+*.swp
