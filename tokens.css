@@ -158,20 +158,22 @@ body { background: var(--white); color: var(--text); }
   pointer-events: auto;
 }
 .nav-mega-inner {
-  max-width: var(--max-w); margin: 0 auto; padding: 28px 40px;
+  max-width: var(--max-w); margin: 0 auto; padding: 24px 40px;
   display: flex; gap: 0;
 }
 .nav-mega-col {
-  flex: 1; padding: 0 24px;
+  flex: 1; padding: 0 20px;
   border-right: 1px solid var(--border-light);
 }
+/* 컨설팅 컬럼 — 항목이 많아 2배 너비 */
+.nav-mega-col.wide { flex: 1.8; }
 .nav-mega-col:first-child { padding-left: 0; }
 .nav-mega-col:last-child { border-right: none; padding-right: 0; }
 .nav-mega-label {
-  font-family: 'Times New Roman', 'Georgia', Times, serif;
-  font-style: italic; font-weight: 400;
-  font-size: 11px; line-height: 1; color: var(--accent);
-  letter-spacing: 0.03em;
+  font-family: var(--font);
+  font-style: normal; font-weight: 700;
+  font-size: 12px; line-height: 1; color: var(--accent);
+  letter-spacing: -0.01em;
   margin-bottom: 14px; display: block;
 }
 .nav-mega a {
