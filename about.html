@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회사소개 | 플라슈티컬즈</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="tokens.css">
+<style>
+/* ── Light footer ── */
+
+/* ── About page hero (탭 페이지에는 별도 hero 없이 탭 nav로 시작) ── */
+.about-header {
+  padding: 56px 32px 0;
+  background: var(--gray-bg2);
+  border-bottom: 1px solid var(--border);
+}
+.about-header-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  padding-bottom: 40px;
+}
+.about-header-label {
+  font: 600 11px/1 var(--mono); color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px;
+}
+.about-header-title {
+  font-size: clamp(28px, 4vw, 44px); font-weight: 700;
+  letter-spacing: -0.03em; color: var(--navy);
+  line-height: 1.2; margin-bottom: 14px;
+}
+.about-header-title span { color: var(--accent); }
+.about-header-sub {
+  font-size: 16px; line-height: 1.7; color: var(--text2);
+  max-width: 520px;
+}
+
+/* ── Mission quote ── */
+.mission-quote {
+  background: var(--navy); border-radius: var(--radius);
+  padding: 48px; margin-bottom: 48px;
+}
+.mission-quote-label {
+  font: 600 11px/1 var(--mono); color: var(--accent2);
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px;
+}
+.mission-quote-text {
+  font-size: clamp(18px, 2.5vw, 26px); font-weight: 700;
+  line-height: 1.5; letter-spacing: -0.03em;
+  color: var(--white); margin-bottom: 12px;
+}
+.mission-quote-en {
+  font-size: 13px; color: rgba(255,255,255,.4); font-style: italic;
+}
+
+/* ── Company description ── */
+.company-desc-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 48px;
+}
+.company-desc-main {
+  font-size: 15px; line-height: 1.85; color: var(--text2);
+}
+.company-desc-main strong { color: var(--navy); font-weight: 600; }
+.company-tag-list { display: flex; flex-direction: column; gap: 12px; }
+.company-tag-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 16px; background: var(--white);
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+}
+.company-tag-dot {
+  width: 8px; height: 8px; flex-shrink: 0;
+  background: var(--accent); border-radius: 50%; margin-top: 5px;
+}
+.company-tag-text { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.5; }
+.company-tag-sub { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+/* ── Org chart ── */
+.org-chart {
+  display: flex; flex-direction: column; align-items: center; gap: 0;
+}
+.org-node {
+  display: flex; flex-direction: column; align-items: center; position: relative;
+}
+.org-node::before {
+  content: ''; width: 2px; height: 28px;
+  background: linear-gradient(to bottom, var(--accent), var(--accent2));
+  display: block;
+}
+.org-node:first-child::before { display: none; }
+.org-box {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); padding: 14px 28px;
+  text-align: center; min-width: 140px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.org-box:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(0,121,250,.1); }
+.org-box.top { background: var(--navy); border-color: var(--navy); min-width: 120px; }
+.org-box.top .org-title { color: var(--white); }
+.org-box.top .org-en { color: rgba(255,255,255,.5); }
+.org-title { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+.org-en { font-size: 11px; color: var(--text3); margin-top: 3px; font-family: var(--mono); }
+.org-children {
+  display: flex; gap: 16px; position: relative;
+  padding-top: 28px;
+}
+.org-children::before {
+  content: ''; position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 2px; height: 28px;
+  background: linear-gradient(to bottom, var(--accent), var(--accent2));
+}
+.org-children::after {
+  content: ''; position: absolute;
+  top: 0; left: calc(50% - 60px); right: calc(50% - 60px);
+  height: 1.5px; background: var(--accent2);
+}
+.org-child {
+  display: flex; flex-direction: column; align-items: center; gap: 0;
+}
+.org-child-line {
+  width: 2px; height: 28px;
+  background: linear-gradient(to bottom, var(--accent2), var(--accent));
+}
+.org-child-box {
+  background: var(--accent-light); border: 1.5px solid rgba(0,121,250,.2);
+  border-radius: var(--radius-sm); padding: 12px 20px;
+  text-align: center; min-width: 110px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.org-child-box:hover { border-color: var(--accent); box-shadow: 0 4px 14px rgba(0,121,250,.12); }
+.org-child-title { font-size: 14px; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; }
+.org-child-en { font-size: 11px; color: var(--text2); margin-top: 3px; font-family: var(--mono); }
+
+/* ── Role table ── */
+.role-list { display: flex; flex-direction: column; gap: 16px; }
+.role-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px 32px;
+  display: grid; grid-template-columns: 120px 1fr; gap: 24px; align-items: flex-start;
+  transition: box-shadow .25s, border-color .25s;
+}
+.role-card:hover { box-shadow: var(--shadow-sm); border-color: rgba(0,121,250,.2); }
+.role-title { font-size: 16px; font-weight: 700; color: var(--navy); letter-spacing: -0.02em; }
+.role-en { font: 600 11px/1 var(--mono); color: var(--text3); margin-top: 4px; }
+.role-desc { font-size: 14px; line-height: 1.75; color: var(--text2); }
+
+/* ── Lab section ── */
+.lab-desc {
+  font-size: 15px; line-height: 1.85; color: var(--text2); margin-bottom: 32px;
+}
+.lab-items { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+.lab-item {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 24px;
+  transition: box-shadow .25s, border-color .25s;
+}
+.lab-item:hover { box-shadow: var(--shadow-sm); border-color: rgba(0,121,250,.2); }
+.lab-item-icon {
+  width: 40px; height: 40px; background: var(--accent-light);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 14px;
+}
+.lab-item-icon svg { width: 18px; height: 18px; color: var(--accent); }
+.lab-item-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; letter-spacing: -0.02em; }
+.lab-item-desc { font-size: 13px; line-height: 1.65; color: var(--text2); }
+
+@media (max-width: 768px) {
+  .about-header { padding: 40px 20px 0; }
+  .company-desc-grid { grid-template-columns: 1fr; }
+  .org-children { gap: 8px; }
+  .org-children::after { left: 0; right: 0; }
+  .role-card { grid-template-columns: 1fr; gap: 8px; }
+  .lab-items { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ╔══════════════════════════════════════════════════════════╗ -->
+<!-- ║  NAV                                                     ║ -->
+<!-- ╚══════════════════════════════════════════════════════════╝ -->
+<nav id="plt-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="white"/></svg>
+      </div>
+      Placeuticals
+    </a>
+
+    <ul class="nav-menu">
+      <li class="nav-item is-active">
+        <a href="about.html" class="nav-link">회사소개</a>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" type="button">
+          서비스
+          <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-drop">
+          <a href="consulting.html">컨설팅</a>
+          <a href="platform.html">연구 플랫폼</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="support.html" class="nav-link">고객지원</a>
+      </li>
+    </ul>
+
+    <a href="support.html#contact" class="nav-cta">상담 신청</a>
+
+    <button class="nav-ham" id="nav-ham-btn" aria-label="메뉴 열기" type="button">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- 모바일 드로어 -->
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nav-drawer-section">
+    <div class="nav-drawer-label">회사소개</div>
+    <a href="about.html" class="is-active">회사소개</a>
+  </div>
+  <div class="nav-drawer-section">
+    <div class="nav-drawer-label">서비스</div>
+    <a href="consulting.html">컨설팅</a>
+    <a href="platform.html">연구 플랫폼</a>
+  </div>
+  <div class="nav-drawer-section">
+    <div class="nav-drawer-label">고객지원</div>
+    <a href="support.html#qna">Q&amp;A</a>
+    <a href="support.html#contact">Contact Us</a>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <!-- 페이지 헤더 (탭 페이지는 hero 대신 간단한 헤더) -->
+  <div class="about-header">
+    <div class="about-header-inner">
+      <div class="about-header-label">About Placeuticals</div>
+      <div class="about-header-title">재생의료를 임상으로<br><span>연결하는</span> 기업</div>
+      <p class="about-header-sub">태반 유래 줄기세포·엑소좀 연구와 임상 진입 전략을 통합하는 바이오 기업입니다.</p>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════════════════════════╗ -->
+  <!-- ║  TAB NAV                                                 ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════╝ -->
+  <nav class="tab-nav" id="page-tabs">
+    <div class="tab-nav-inner">
+      <a href="#mission"      class="tab-item active" data-target="mission">회사소개 &amp; 미션</a>
+      <a href="#organization" class="tab-item"        data-target="organization">조직 구성</a>
+      <a href="#roles"        class="tab-item"        data-target="roles">직책 구조</a>
+      <a href="#lab"          class="tab-item"        data-target="lab">기업부설연구소</a>
+      <a href="#location"     class="tab-item"        data-target="location">오시는길</a>
+    </div>
+  </nav>
+
+  <!-- ╔══════════════════════════════════════════════════════════╗ -->
+  <!-- ║  TAB 1 · 회사소개 & 미션                                  ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════╝ -->
+  <section id="mission" class="tab-section section tab-offset">
+    <div class="inner">
+      <div class="section-label">Company &amp; Mission</div>
+      <h2 class="section-h2">회사소개 &amp; <span>미션</span></h2>
+
+      <div class="mission-quote">
+        <div class="mission-quote-label">Mission</div>
+        <div class="mission-quote-text">연구와 임상 사이의 간극을<br>개발 전략으로 연결합니다</div>
+        <div class="mission-quote-en">Bridging the gap between research and clinical entry through development strategy</div>
+      </div>
+
+      <div class="company-desc-grid">
+        <div>
+          <p class="company-desc-main">
+            <strong>플라슈티컬즈(Placeuticals)</strong>는 태반 유래 줄기세포 및 엑소좀 기반
+            재생의료 기술을 바탕으로 임상 진입 및 개발 전략을 설계하는 바이오 기업입니다.<br><br>
+            단순 연구에 머무르지 않고, <strong>Backward Design</strong> 방법론을 통해
+            임상 목표에서 거꾸로 개발 전략을 설계합니다.
+            CMC, 비임상, 규제 전략을 하나의 목표 아래 통합하여
+            재생의료 연구가 임상으로 이어질 수 있도록 지원합니다.<br><br>
+            기업부설연구소를 기반으로 자체 연구개발과 외부 기업 컨설팅을 병행하며,
+            재생의료 분야의 임상 진입 장벽을 낮추는 데 집중합니다.
+          </p>
+        </div>
+        <div class="company-tag-list">
+          <div class="company-tag-item">
+            <div class="company-tag-dot"></div>
+            <div>
+              <div class="company-tag-text">Strategy-driven</div>
+              <div class="company-tag-sub">임상 진입 중심의 개발 전략</div>
+            </div>
+          </div>
+          <div class="company-tag-item">
+            <div class="company-tag-dot"></div>
+            <div>
+              <div class="company-tag-text">Backward Design</div>
+              <div class="company-tag-sub">목표 기반 역방향 설계 방법론</div>
+            </div>
+          </div>
+          <div class="company-tag-item">
+            <div class="company-tag-dot"></div>
+            <div>
+              <div class="company-tag-text">Regenerative Medicine</div>
+              <div class="company-tag-sub">태반 유래 줄기세포·엑소좀 연구</div>
+            </div>
+          </div>
+          <div class="company-tag-item">
+            <div class="company-tag-dot"></div>
+            <div>
+              <div class="company-tag-text">인증 벤처기업</div>
+              <div class="company-tag-sub">벤처기업 인증 보유</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ╔══════════════════════════════════════════════════════════╗ -->
+  <!-- ║  TAB 2 · 조직 구성                                        ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════╝ -->
+  <section id="organization" class="tab-section section alt tab-offset">
+    <div class="inner">
+      <div class="section-label">Organization</div>
+      <h2 class="section-h2">조직 <span>구성</span></h2>
+      <p class="section-sub">연구, 기획, 임상이 통합된 조직 구조를 기반으로 임상 진입 중심의 개발 전략을 수행합니다.</p>
+
+      <div class="org-chart">
+
+        <div class="org-node">
+          <div class="org-box top">
+            <div class="org-title">CEO</div>
+            <div class="org-en">Chief Executive Officer</div>
+          </div>
+        </div>
+
+        <div class="org-node">
+          <div class="org-box">
+            <div class="org-title">CTO</div>
+            <div class="org-en">Chief Technology Officer</div>
+          </div>
+        </div>
+
+        <div class="org-node">
+          <div class="org-box">
+            <div class="org-title">연구소장</div>
+            <div class="org-en">Research Director</div>
+          </div>
+        </div>
+
+        <div class="org-children">
+          <div class="org-child">
+            <div class="org-child-line"></div>
+            <div class="org-child-box">
+              <div class="org-child-title">개발팀</div>
+              <div class="org-child-en">Development</div>
+            </div>
+          </div>
+          <div class="org-child">
+            <div class="org-child-line"></div>
+            <div class="org-child-box">
+              <div class="org-child-title">임상팀</div>
+              <div class="org-child-en">Clinical</div>
+            </div>
+          </div>
+          <div class="org-child">
+            <div class="org-child-line"></div>
+            <div class="org-child-box">
+              <div class="org-child-title">기획팀</div>
+              <div class="org-child-en">Strategy &amp; Planning</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ╔══════════════════════════════════════════════════════════╗ -->
+  <!-- ║  TAB 3 · 직책 구조                                        ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════╝ -->
+  <section id="roles" class="tab-section section tab-offset">
+    <div class="inner">
+      <div class="section-label">Roles</div>
+      <h2 class="section-h2">직책 <span>구조</span></h2>
+      <p class="section-sub">각 직책의 역할과 책임을 명확히 정의합니다.</p>
+
+      <div class="role-list">
+
+        <div class="role-card">
+          <div>
+            <div class="role-title">CEO</div>
+            <div class="role-en">Chief Executive Officer</div>
+          </div>
+          <p class="role-desc">회사의 전략 방향, 비즈니스 개발, 파트너십 및 투자 관계를 총괄합니다. 임상 진입 중심의 사업 전략을 수립하고 실행을 이끕니다.</p>
+        </div>
+
+        <div class="role-card">
+          <div>
+            <div class="role-title">CTO</div>
+            <div class="role-en">Chief Technology Officer</div>
+          </div>
+          <p class="role-desc">기술 전략 및 R&amp;D 방향을 총괄합니다. Backward Design 방법론 기반의 개발 전략을 설계하고 연구소장과 협업하여 기술 로드맵을 관리합니다.</p>
+        </div>
+
+        <div class="role-card">
+          <div>
+            <div class="role-title">연구소장</div>
+            <div class="role-en">Research Director</div>
+          </div>
+          <p class="role-desc">기업부설연구소를 총괄하며, 태반 유래 줄기세포·엑소좀 연구의 전략적 방향을 수립합니다. 개발팀·임상팀·기획팀의 통합 운영을 책임집니다.</p>
+        </div>
+
+        <div class="role-card">
+          <div>
+            <div class="role-title">개발팀</div>
+            <div class="role-en">Development Team</div>
+          </div>
+          <p class="role-desc">비임상 시험 설계, CMC, 공정개발 등 임상 진입을 위한 개발 업무를 수행합니다. Backward Design 전략에 따라 연구 데이터를 임상 요건에 맞게 정렬합니다.</p>
+        </div>
+
+        <div class="role-card">
+          <div>
+            <div class="role-title">임상팀</div>
+            <div class="role-en">Clinical Team</div>
+          </div>
+          <p class="role-desc">첨단재생의료위원회 심의, IRB 대응, 임상연구 계획서 작성 등 임상 행정 및 전략 업무를 담당합니다.</p>
+        </div>
+
+        <div class="role-card">
+          <div>
+            <div class="role-title">기획팀</div>
+            <div class="role-en">Strategy &amp; Planning Team</div>
+          </div>
+          <p class="role-desc">컨설팅 사업 기획, 외부 파트너십 관리, 인증·인정 대응 등 사업 개발 및 전략 기획을 담당합니다.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ╔══════════════════════════════════════════════════════════╗ -->
+  <!-- ║  TAB 4 · 기업부설연구소                                    ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════╝ -->
+  <section id="lab" class="tab-section section alt tab-offset">
+    <div class="inner">
+      <div class="section-label">Corporate R&amp;D Institute</div>
+      <h2 class="section-h2">기업부설 <span>연구소</span></h2>
+
+      <p class="lab-desc">
+        플라슈티컬즈는 기업부설연구소를 기반으로 재생의료 연구개발 및 임상 진입 전략을 수행합니다.
+        자체 R&amp;D 역량을 갖추고 외부 기업의 연구개발 전략도 함께 지원합니다.
+      </p>
+
+      <div class="lab-items">
+
+        <div class="lab-item">
+          <div class="lab-item-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M9 3v11a3 3 0 0 0 6 0V3M6 3h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="lab-item-title">재생의료 연구개발</div>
+          <p class="lab-item-desc">태반 유래 줄기세포·엑소좀 기반 연구를 체계적으로 수행합니다. 임상 진입 요건에 맞춘 연구 설계로 효율적인 개발을 추진합니다.</p>
+        </div>
+
+        <div class="lab-item">
+          <div class="lab-item-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="lab-item-title">인증 R&amp;D 역량</div>
+          <p class="lab-item-desc">기업부설연구소 인정을 기반으로 공인된 연구개발 역량을 보유합니다. 연구비 세액공제 등 제도적 혜택을 활용한 지속 가능한 R&amp;D를 운영합니다.</p>
+        </div>
+
+        <div class="lab-item">
+          <div class="lab-item-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M17 20h5v-2a3 3 0 0 0-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 0 1 5.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 0 1 9.288 0M15 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="lab-item-title">외부 기업 지원</div>
+          <p class="lab-item-desc">재생의료 기업의 기업부설연구소 인정 컨설팅도 제공합니다. 조직 설계, 연구개발 체계 구축, 인정 신청 대응을 지원합니다.</p>
+        </div>
+
+        <div class="lab-item">
+          <div class="lab-item-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M9 20l-5.447-2.724A1 1 0 0 1 3 16.382V5.618a1 1 0 0 1 1.447-.894L9 7m0 13l6-3m-6-10l6-3m0 16l5.447-2.724A1 1 0 0 0 21 16.382V5.618a1 1 0 0 0-1.447-.894L15 7m0 13V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="lab-item-title">통합 개발 전략</div>
+          <p class="lab-item-desc">연구소 내에서 연구와 전략을 함께 설계합니다. Backward Design 방법론을 연구소 운영에 적용하여 임상 진입 목표와 정렬된 연구를 수행합니다.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 오시는길 -->
+  <section id="location" class="tab-section section tab-offset">
+    <div class="inner">
+      <div class="section-label">Location</div>
+      <h2 class="section-h2">오시는길</h2>
+      <p class="section-sub">경기도 성남시 중원구 갈마치로 314, 3층 305~306호 (상대원동, 성남 센트럴비즈타워 1)</p>
+
+      <div style="margin-top:32px; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm);">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.5!2d127.1578!3d37.4382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca5!2z7ISx64Ko7IS87Yq4656067mE7KaI7YOA7JuMIDHssKg!5e0!3m2!1sko!2skr!4v1700000000000"
+          width="100%" height="400" style="border:0; display:block;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <div style="margin-top:32px; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;">
+        <div style="padding:24px; background:var(--gray-bg); border-radius:var(--radius-sm);">
+          <div style="font-weight:700; font-size:14px; color:var(--text); margin-bottom:8px;">주소</div>
+          <div style="font-size:13px; color:var(--text2); line-height:1.7;">
+            (13201) 경기도 성남시 중원구 갈마치로 314<br>
+            3층 305~306호 (상대원동, 성남 센트럴비즈타워 1)
+          </div>
+        </div>
+        <div style="padding:24px; background:var(--gray-bg); border-radius:var(--radius-sm);">
+          <div style="font-weight:700; font-size:14px; color:var(--text); margin-bottom:8px;">이메일</div>
+          <div style="font-size:13px; color:var(--text2);">contact@placeuticals.co.kr</div>
+        </div>
+        <div style="padding:24px; background:var(--gray-bg); border-radius:var(--radius-sm);">
+          <div style="font-weight:700; font-size:14px; color:var(--text); margin-bottom:8px;">대중교통</div>
+          <div style="font-size:13px; color:var(--text2); line-height:1.7;">
+            지하철 8호선 남한산성입구역 2번 출구<br>
+            도보 약 10분
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="page-footer">
+    <div class="ft-inner">
+      <div>
+        <div class="ft-brand">Placeuticals</div>
+        <div class="ft-info">
+          <strong>주식회사 플라슈티컬즈</strong><br>
+          대표이사 이준 | 사업자번호 428-87-03429<br>
+          경기도 성남시 중원구 갈마치로 314, 3층 305~306호<br>
+          (상대원동, 성남 센트럴비즈타워 1) 우)13201
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-title">Services</div>
+        <div class="ft-col-links">
+          <a href="consulting.html">개발 전략 컨설팅</a>
+          <a href="platform.html">연구 플랫폼</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-title">Company</div>
+        <div class="ft-col-links">
+          <a href="about.html">회사소개</a>
+          <a href="about.html#location">오시는길</a>
+          <a href="support.html#contact">문의하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <div class="footer-copy">© 2026 Placeuticals Co., Ltd. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="#">이용약관</a>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /page-wrap -->
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── 탭 IntersectionObserver ── */
+  var sections = document.querySelectorAll('.tab-section');
+  var tabs     = document.querySelectorAll('#page-tabs .tab-item');
+  var activate = function (id) {
+    tabs.forEach(function (t) {
+      t.classList.toggle('active', t.dataset.target === id);
+    });
+  };
+  var observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) activate(e.target.id);
+      });
+    },
+    { rootMargin: '-' + (60 + 60 + 8) + 'px 0px -45% 0px', threshold: 0 }
+  );
+  sections.forEach(function (s) { observer.observe(s); });
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () { activate(tab.dataset.target); });
+  });
+
+  /* ── 모바일 햄버거 ── */
+  var hamBtn = document.getElementById('nav-ham-btn');
+  var drawer = document.getElementById('nav-drawer');
+  hamBtn.addEventListener('click', function () {
+    var isOpen = drawer.classList.toggle('open');
+    hamBtn.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
+  });
+  drawer.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      drawer.classList.remove('open');
+      hamBtn.setAttribute('aria-label', '메뉴 열기');
+    });
+  });
+}());
+</script>
+
+</body>
+</html>

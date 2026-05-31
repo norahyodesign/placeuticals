@@ -6,8 +6,8 @@
 
 ## 🔴 콘텐츠 — 실제 정보 입력 필요
 
-- [ ] 대표이사 실명 입력
-- [ ] 본사 주소 입력
+- [x] 대표이사 실명 입력
+- [x] 본사 주소 입력
 - [ ] 대표 전화번호 입력
 - [ ] 이메일 주소 확정 및 입력
 
@@ -15,11 +15,12 @@
 
 ## 🟡 페이지 생성
 
-- [x] `index.html` — 메인 페이지 (8섹션 단일 파일)
-- [ ] `about.html` — 회사소개 통합 페이지
-- [ ] `support.html` — 고객지원 통합 페이지 (Q&A / Contact Us)
-- [ ] 서비스 상세 페이지 (서비스 구조 확정 후 생성)
-- [ ] 개인정보처리방침 페이지
+- [x] `index.html` — 홈페이지 (Hero / What We Do / Core Message / Consulting Highlight / Contact)
+- [x] `about.html` — 회사소개 탭 페이지 (회사소개·미션 / 조직 구성 / 직책 구조 / 기업부설연구소)
+- [x] `consulting.html` — 서비스: 개발 전략 컨설팅 (5개 서비스 + 프로세스)
+- [x] `platform.html` — 서비스: 연구 플랫폼 (Core Platform / Application / Timeline)
+- [x] `support.html` — 고객지원 탭 페이지 (Q&A / Contact Us)
+- [x] 개인정보처리방침 페이지
 - [ ] 이용약관 페이지
 
 ---

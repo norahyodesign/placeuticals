@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>연구 플랫폼 | 플라슈티컬즈</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="tokens.css">
+<style>
+/* ── Light theme overrides ── */
+.page-hero { background: var(--gray-bg2); padding-bottom: 72px; }
+.page-hero h1 { color: var(--navy); }
+.page-hero h1 span { color: var(--accent); }
+.page-hero p { color: var(--text2); }
+.hero-overline { color: var(--accent); }
+.hero-tag { color: var(--text2); background: var(--white); border-color: var(--border); }
+
+.cta-section { background: var(--accent-light); }
+.cta-section h2 { color: var(--navy); }
+.cta-section h2 span { color: var(--accent); }
+.cta-section p { color: var(--text2); }
+.cta-label { color: var(--accent); }
+
+
+/* ── Platform intro card ── */
+.platform-intro {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 48px;
+  text-align: center; margin-bottom: 56px;
+}
+.platform-intro-label {
+  font: 600 11px/1 var(--mono); color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px;
+}
+.platform-intro-title {
+  font-size: clamp(22px, 3vw, 32px); font-weight: 700;
+  letter-spacing: -0.03em; color: var(--navy);
+  margin-bottom: 16px; line-height: 1.3;
+}
+.platform-intro-en {
+  font-size: 14px; color: var(--text3); font-style: italic; margin-bottom: 20px;
+}
+.platform-intro-desc {
+  font-size: 15px; line-height: 1.8; color: var(--text2);
+  max-width: 600px; margin: 0 auto;
+}
+
+/* ── Application cards (extend .card) ── */
+.app-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 36px 32px;
+  display: flex; flex-direction: column;
+  transition: box-shadow .3s var(--ease), border-color .3s, transform .3s var(--ease);
+}
+.app-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: rgba(0,121,250,.25);
+  transform: translateY(-5px);
+}
+.app-icon {
+  width: 56px; height: 56px; background: var(--accent-light);
+  border-radius: 16px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px; transition: background .3s;
+}
+.app-card:hover .app-icon { background: var(--accent); }
+.app-icon svg { width: 26px; height: 26px; color: var(--accent); transition: color .3s; }
+.app-card:hover .app-icon svg { color: var(--white); }
+.app-badge {
+  font: 600 11px/1 var(--mono); color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px;
+}
+.app-title {
+  font-size: 20px; font-weight: 700; letter-spacing: -0.025em;
+  color: var(--text); margin-bottom: 12px;
+}
+.app-desc { font-size: 14px; line-height: 1.75; color: var(--text2); flex: 1; }
+.app-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; }
+.app-tag {
+  font-size: 12px; font-weight: 500; padding: 4px 10px;
+  border-radius: var(--radius-xs);
+  background: var(--accent-light); color: var(--accent);
+  border: 1px solid rgba(0,121,250,.15);
+}
+
+/* ── Development timeline strip ── */
+.dev-timeline {
+  display: flex; align-items: flex-start; gap: 0;
+  justify-content: center; flex-wrap: wrap;
+}
+.dev-step {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 12px; text-align: center; flex: 1; min-width: 110px; max-width: 160px;
+}
+.dev-step-dot {
+  width: 14px; height: 14px; background: var(--accent);
+  border-radius: 50%; border: 3px solid var(--accent-light);
+  box-shadow: 0 0 0 3px rgba(0,121,250,.15);
+  flex-shrink: 0;
+}
+.dev-step-title { font-size: 14px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+.dev-step-desc { font-size: 12px; line-height: 1.6; color: var(--text2); }
+.dev-arrow {
+  display: flex; align-items: flex-start; padding-top: 3px; flex-shrink: 0;
+  color: var(--border);
+}
+.dev-arrow svg { width: 20px; height: 20px; }
+
+/* ── Core message quote ── */
+.platform-quote {
+  background: var(--navy); border-radius: var(--radius);
+  padding: 48px; text-align: center; margin-top: 56px;
+}
+.platform-quote-text {
+  font-size: clamp(18px, 2.5vw, 26px); font-weight: 700;
+  line-height: 1.5; letter-spacing: -0.03em;
+  color: var(--white); margin-bottom: 12px;
+}
+.platform-quote-text em { color: var(--accent2); font-style: normal; }
+.platform-quote-sub { font-size: 14px; color: rgba(255,255,255,.5); }
+
+@media (max-width: 768px) {
+  .platform-intro { padding: 32px 24px; }
+  .dev-timeline { flex-direction: column; align-items: center; gap: 16px; }
+  .dev-arrow { transform: rotate(90deg); padding-top: 0; }
+  .dev-step { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ╔══════════════════════════════════════════════════════════╗ -->
+<!-- ║  NAV                                                     ║ -->
+<!-- ╚══════════════════════════════════════════════════════════╝ -->
+<nav id="plt-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="white"/></svg>
+      </div>
+      Placeuticals
+    </a>
+
+    <ul class="nav-menu">
+      <li class="nav-item">
+        <a href="about.html" class="nav-link">회사소개</a>
+      </li>
+      <li class="nav-item is-active">
+        <button class="nav-link" type="button">
+          서비스
+          <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-drop">
+          <a href="consulting.html">컨설팅</a>
+          <a href="platform.html" class="is-active">연구 플랫폼</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="support.html" class="nav-link">고객지원</a>
+      </li>
+    </ul>
+
+    <a href="support.html#contact" class="nav-cta">상담 신청</a>
+
+    <button class="nav-ham" id="nav-ham-btn" aria-label="메뉴 열기" type="button">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- 모바일 드로어 -->
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nav-drawer-section">
+    <div class="nav-drawer-label">회사소개</div>
+    <a href="about.html">회사소개</a>
+  </div>
+  <div class="nav-drawer-section">
+    <div class="nav-drawer-label">서비스</div>
+    <a href="consulting.html">컨설팅</a>
+    <a href="platform.html" class="is-active">연구 플랫폼</a>
+  </div>
+  <div class="nav-drawer-section">
+    <div class="nav-drawer-label">고객지원</div>
+    <a href="support.html#qna">Q&amp;A</a>
+    <a href="support.html#contact">Contact Us</a>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <!-- ╔══════════════════════════════════════════════════════════╗ -->
+  <!-- ║  HERO                                                    ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════╝ -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="hero-overline">Services — Research Platform</div>
+      <h1>태반 유래 MSC &amp;<br><span>엑소좀 연구 플랫폼</span></h1>
+      <p>줄기세포, 엑소좀 및 바이오소재 기반 재생의료 기술을 하나의 플랫폼에서 의약품·동물의약품·화장품으로 확장합니다.</p>
+      <div class="hero-tags">
+        <span class="hero-tag">Placenta-derived MSC</span>
+        <span class="hero-tag">Exosome</span>
+        <span class="hero-tag">R&amp;BD Platform</span>
+        <span class="hero-tag">Backward Design</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ╔══════════════════════════════════════════════════════════╗ -->
+  <!-- ║  CORE PLATFORM                                           ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════╝ -->
+  <section class="section">
+    <div class="inner">
+      <div class="section-label">Core Platform</div>
+      <h2 class="section-h2">태반 유래 재생의료 <span>핵심 플랫폼</span></h2>
+      <p class="section-sub">임상 진입을 목표로 단계별 개발 전략을 수행하는 통합 R&amp;BD 플랫폼입니다.</p>
+
+      <div class="platform-intro">
+        <div class="platform-intro-label">Platform Overview</div>
+        <div class="platform-intro-title">태반 유래 줄기세포 및 엑소좀 기반 플랫폼</div>
+        <div class="platform-intro-en">Placenta-derived MSC &amp; Exosome Platform</div>
+        <p class="platform-intro-desc">
+          플라슈티컬즈는 태반 유래 줄기세포(MSC) 및 엑소좀 연구를 핵심 플랫폼으로,
+          의약품, 동물의약품, 화장품 등 다양한 산업 분야로 응용 기술을 확장합니다.
+          Backward Design 기반 개발 전략으로 연구부터 임상까지 일관된 로드맵을 제공합니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ╔══════════════════════════════════════════════════════════╗ -->
+  <!-- ║  APPLICATION AREAS                                       ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════╝ -->
+  <section class="section alt">
+    <div class="inner">
+      <div class="section-label">Application</div>
+      <h2 class="section-h2">3가지 <span>적용 분야</span></h2>
+      <p class="section-sub">하나의 플랫폼으로 다양한 산업으로 확장합니다.</p>
+
+      <div class="card-grid-3">
+
+        <div class="app-card">
+          <div class="app-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M9 3v11a3 3 0 0 0 6 0V3M6 3h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="app-badge">Pharmaceutical</div>
+          <div class="app-title">의약품</div>
+          <p class="app-desc">임상 진입을 목표로 하는 재생의료 치료제 개발. 첨단재생의료법 기반 임상연구 및 IND 승인 전략을 포함합니다.</p>
+          <div class="app-tags">
+            <span class="app-tag">재생의료 치료제</span>
+            <span class="app-tag">임상 진입</span>
+            <span class="app-tag">IND 전략</span>
+          </div>
+        </div>
+
+        <div class="app-card">
+          <div class="app-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7v-2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M7 9c2.5-1.5 7.5-1.5 10 0M7 15c2.5 1.5 7.5 1.5 10 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="app-badge">Veterinary</div>
+          <div class="app-title">동물의약품</div>
+          <p class="app-desc">반려동물 재생의료 치료제 개발. 동물용 의약품 허가 기준에 맞춘 비임상·임상 전략을 설계합니다.</p>
+          <div class="app-tags">
+            <span class="app-tag">반려동물 재생의료</span>
+            <span class="app-tag">동물 임상</span>
+            <span class="app-tag">허가 전략</span>
+          </div>
+        </div>
+
+        <div class="app-card">
+          <div class="app-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2a5 5 0 1 0 0 10A5 5 0 0 0 12 2zM12 14c-5.33 0-8 2.67-8 4v2h16v-2c0-1.33-2.67-4-8-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="app-badge">Cosmetics</div>
+          <div class="app-title">화장품</div>
+          <p class="app-desc">고기능성 바이오 소재 기반 화장품 개발. 태반 유래 성분의 기능성 원료 개발 및 제품화를 지원합니다.</p>
+          <div class="app-tags">
+            <span class="app-tag">기능성 바이오소재</span>
+            <span class="app-tag">원료 개발</span>
+            <span class="app-tag">제품화</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ╔══════════════════════════════════════════════════════════╗ -->
+  <!-- ║  DEVELOPMENT TIMELINE                                    ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════╝ -->
+  <section class="section">
+    <div class="inner">
+      <div class="section-label">Development Timeline</div>
+      <h2 class="section-h2">단계별 <span>개발 흐름</span></h2>
+      <p class="section-sub">임상 진입을 목표로 단계별 개발 전략을 수행합니다.</p>
+
+      <div class="dev-timeline">
+
+        <div class="dev-step">
+          <div class="dev-step-dot"></div>
+          <div class="dev-step-title">기초 연구</div>
+          <p class="dev-step-desc">MSC / 엑소좀 특성 분석 및 작용기전 규명</p>
+        </div>
+
+        <div class="dev-arrow">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <div class="dev-step">
+          <div class="dev-step-dot"></div>
+          <div class="dev-step-title">비임상</div>
+          <p class="dev-step-desc">In vitro / In vivo 효능·독성 시험</p>
+        </div>
+
+        <div class="dev-arrow">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <div class="dev-step">
+          <div class="dev-step-dot"></div>
+          <div class="dev-step-title">CMC</div>
+          <p class="dev-step-desc">공정개발, 시료생산, 품질관리</p>
+        </div>
+
+        <div class="dev-arrow">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <div class="dev-step">
+          <div class="dev-step-dot"></div>
+          <div class="dev-step-title">임상</div>
+          <p class="dev-step-desc">임상연구 계획 승인 및 임상 진입</p>
+        </div>
+
+        <div class="dev-arrow">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <div class="dev-step">
+          <div class="dev-step-dot" style="background: var(--accent); box-shadow: 0 0 0 5px rgba(0,121,250,.2);"></div>
+          <div class="dev-step-title">상용화</div>
+          <p class="dev-step-desc">허가 완료 및 제품 출시</p>
+        </div>
+
+      </div>
+
+      <div class="platform-quote">
+        <div class="platform-quote-text">하나의 플랫폼으로<br><em>다양한 산업</em>으로 확장</div>
+        <div class="platform-quote-sub">Backward Design 기반 개발 전략 — 기초연구부터 상용화까지</div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ╔══════════════════════════════════════════════════════════╗ -->
+  <!-- ║  CTA                                                     ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════╝ -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <div class="cta-label">Contact Us</div>
+      <h2>공동 연구 및<br><span>협업</span>을 환영합니다</h2>
+      <p>재생의료 연구, 플랫폼 활용, 컨설팅 등 모든 협업 문의를 환영합니다.</p>
+      <div class="cta-btns">
+        <a href="support.html#contact" class="btn-primary">문의하기 →</a>
+        <a href="mailto:contact@placeuticals.co.kr" class="btn-outline">이메일로 보내기</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="page-footer">
+    <div class="ft-inner">
+      <div>
+        <div class="ft-brand">Placeuticals</div>
+        <div class="ft-info">
+          <strong>주식회사 플라슈티컬즈</strong><br>
+          대표이사 이준 | 사업자번호 428-87-03429<br>
+          경기도 성남시 중원구 갈마치로 314, 3층 305~306호<br>
+          (상대원동, 성남 센트럴비즈타워 1) 우)13201
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-title">Services</div>
+        <div class="ft-col-links">
+          <a href="consulting.html">개발 전략 컨설팅</a>
+          <a href="platform.html">연구 플랫폼</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-title">Company</div>
+        <div class="ft-col-links">
+          <a href="about.html">회사소개</a>
+          <a href="about.html#location">오시는길</a>
+          <a href="support.html#contact">문의하기</a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <div class="footer-copy">© 2026 Placeuticals Co., Ltd. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="#">이용약관</a>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /page-wrap -->
+
+<script>
+(function () {
+  'use strict';
+  var hamBtn = document.getElementById('nav-ham-btn');
+  var drawer = document.getElementById('nav-drawer');
+  hamBtn.addEventListener('click', function () {
+    var isOpen = drawer.classList.toggle('open');
+    hamBtn.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
+  });
+  drawer.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      drawer.classList.remove('open');
+      hamBtn.setAttribute('aria-label', '메뉴 열기');
+    });
+  });
+}());
+</script>
+
+</body>
+</html>
