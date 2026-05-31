@@ -108,15 +108,11 @@ body { background: var(--white); color: var(--text); }
   height: 100%; display: flex; align-items: center; justify-content: space-between;
 }
 .nav-logo {
-  display: flex; align-items: center; gap: 9px;
-  font-size: 16px; font-weight: 700; color: var(--navy);
-  letter-spacing: -0.03em; text-decoration: none; flex-shrink: 0;
+  display: flex; align-items: center;
+  font-size: 17px; font-weight: 800; color: var(--navy);
+  letter-spacing: -0.04em; text-decoration: none; flex-shrink: 0;
 }
-.nav-logo-icon {
-  width: 30px; height: 30px; background: var(--navy); border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-}
-.nav-logo-icon svg { width: 16px; height: 16px; }
+.nav-logo .logo-p { color: var(--accent); }
 
 /* 서비스 상세 페이지 백버튼 */
 .nav-back {
@@ -152,17 +148,11 @@ body { background: var(--white); color: var(--text); }
   box-shadow: 0 16px 48px rgba(0,0,0,.10);
   opacity: 0; visibility: hidden;
   transform: translateY(-6px);
-  transition: opacity .22s ease, transform .22s ease, visibility .22s;
+  transition: opacity .2s ease, transform .2s ease, visibility .2s;
   z-index: 990;
   pointer-events: none;
 }
-.nav-item:hover .nav-mega {
-  opacity: 1; visibility: visible;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-#plt-nav:has(.nav-menu:hover) .nav-mega,
-#plt-nav:has(.nav-mega:hover) .nav-mega {
+.nav-mega.is-open {
   opacity: 1; visibility: visible;
   transform: translateY(0);
   pointer-events: auto;
@@ -255,7 +245,6 @@ body { background: var(--white); color: var(--text); }
   border-bottom-color: rgba(255,255,255,0.10);
 }
 #plt-nav.on-hero .nav-logo { color: var(--white); }
-#plt-nav.on-hero .nav-logo-icon { background: rgba(255,255,255,0.15); }
 #plt-nav.on-hero .nav-link { color: rgba(255,255,255,0.80); }
 #plt-nav.on-hero .nav-item:hover > .nav-link { color: var(--white); background: rgba(255,255,255,0.10); }
 #plt-nav.on-hero .nav-ham svg { color: var(--white); }

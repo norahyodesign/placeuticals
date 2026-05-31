@@ -49,6 +49,28 @@
     @keyframes slideImgOut { from { transform: translateX(0);    opacity: 1; } to { transform: translateX(-100%); opacity: 1; } }
     .hero-slide.is-entering { opacity: 1; z-index: 2; animation: slideImgIn  1s cubic-bezier(.4,0,.2,1) both; }
     .hero-slide.is-leaving  { opacity: 1; z-index: 1; animation: slideImgOut 1s cubic-bezier(.4,0,.2,1) forwards; }
+
+    /* 텍스트 스태거 — 이미지 안착 후 순서대로 등장 */
+    @keyframes heroTextIn {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-slide.is-entering .hero-content > * {
+      animation: heroTextIn .5s cubic-bezier(.4,0,.2,1) both;
+    }
+    .hero-slide.is-entering .hero-content > *:nth-child(2) { animation-delay: .65s; }
+    .hero-slide.is-entering .hero-content > *:nth-child(3) { animation-delay: .85s; }
+    .hero-slide.is-entering .hero-content > *:nth-child(4) { animation-delay: 1.0s; }
+    .hero-slide.is-entering .hero-content > *:nth-child(5) { animation-delay: 1.15s; }
+
+    /* 페이지 로드 시 — 텍스트만 (이미지 에니메이션 없음) */
+    .hero-slide.is-text-entering .hero-content > * {
+      animation: heroTextIn .6s cubic-bezier(.4,0,.2,1) both;
+    }
+    .hero-slide.is-text-entering .hero-content > *:nth-child(2) { animation-delay: .15s; }
+    .hero-slide.is-text-entering .hero-content > *:nth-child(3) { animation-delay: .3s; }
+    .hero-slide.is-text-entering .hero-content > *:nth-child(4) { animation-delay: .45s; }
+    .hero-slide.is-text-entering .hero-content > *:nth-child(5) { animation-delay: .6s; }
     .hero-slide::after {
       content: '';
       position: absolute; inset: 0;
@@ -177,7 +199,6 @@
     /* Nav dark mode on hero */
     #plt-nav { background: transparent; border-bottom-color: transparent; }
     #plt-nav .nav-logo { color: var(--white); }
-    #plt-nav .nav-logo-icon { background: rgba(255,255,255,.15); }
     #plt-nav .nav-link { color: rgba(255,255,255,.8); }
     #plt-nav .nav-item:hover > .nav-link { color: var(--white); background: rgba(255,255,255,.1); }
     #plt-nav .nav-ham svg { color: var(--white); }
@@ -189,31 +210,28 @@
       background: var(--white); border-bottom-color: var(--border);
     }
     #plt-nav.scrolled .nav-logo { color: var(--navy); }
-    #plt-nav.scrolled .nav-logo-icon { background: var(--navy); }
     #plt-nav.scrolled .nav-link { color: var(--text2); }
     #plt-nav.scrolled .nav-item:hover > .nav-link { color: var(--navy); background: var(--gray-bg); }
     #plt-nav.scrolled .nav-ham svg { color: var(--navy); }
     #plt-nav.scrolled .nav-cta { background: var(--accent); color: var(--white); }
     #plt-nav.scrolled .nav-cta:hover { background: #d9521a; }
 
-    /* 메가메뉴 hover 시 nav 흰 배경 (hero 투명 스타일 오버라이드) */
+    /* 메가메뉴 열림 시 nav 흰 배경 (hero 투명 스타일 오버라이드) */
     #plt-nav:has(.nav-menu:hover),
-    #plt-nav:has(.nav-mega:hover) {
+    #plt-nav:has(.nav-mega.is-open) {
       background: var(--white) !important;
       border-bottom-color: var(--border) !important;
     }
     #plt-nav:has(.nav-menu:hover) .nav-logo,
-    #plt-nav:has(.nav-mega:hover) .nav-logo { color: var(--navy) !important; }
-    #plt-nav:has(.nav-menu:hover) .nav-logo-icon,
-    #plt-nav:has(.nav-mega:hover) .nav-logo-icon { background: var(--navy) !important; }
+    #plt-nav:has(.nav-mega.is-open) .nav-logo { color: var(--navy) !important; }
     #plt-nav:has(.nav-menu:hover) .nav-link,
-    #plt-nav:has(.nav-mega:hover) .nav-link { color: var(--text2) !important; }
+    #plt-nav:has(.nav-mega.is-open) .nav-link { color: var(--text2) !important; }
     #plt-nav:has(.nav-menu:hover) .nav-item:hover > .nav-link,
-    #plt-nav:has(.nav-mega:hover) .nav-item:hover > .nav-link { color: var(--navy) !important; background: var(--gray-bg) !important; }
+    #plt-nav:has(.nav-mega.is-open) .nav-item:hover > .nav-link { color: var(--navy) !important; background: var(--gray-bg) !important; }
     #plt-nav:has(.nav-menu:hover) .nav-ham svg,
-    #plt-nav:has(.nav-mega:hover) .nav-ham svg { color: var(--navy) !important; }
+    #plt-nav:has(.nav-mega.is-open) .nav-ham svg { color: var(--navy) !important; }
     #plt-nav:has(.nav-menu:hover) .nav-cta,
-    #plt-nav:has(.nav-mega:hover) .nav-cta { background: var(--accent) !important; color: var(--white) !important; }
+    #plt-nav:has(.nav-mega.is-open) .nav-cta { background: var(--accent) !important; color: var(--white) !important; }
 
     /* ── Shared label/heading ── */
     .sec-label {
@@ -487,12 +505,7 @@
 <!-- ╚══════════════════════════════════════════════════════════╝ -->
 <nav id="plt-nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
-      <div class="nav-logo-icon">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="white"/></svg>
-      </div>
-      Placeuticals
-    </a>
+    <a href="index.html" class="nav-logo"><span class="logo-p">P</span>laceuticals</a>
 
     <ul class="nav-menu">
       <li class="nav-item">
@@ -523,18 +536,18 @@
     <div class="nav-mega-inner">
       <div class="nav-mega-col">
         <span class="nav-mega-label">Company</span>
-        <a href="about.html">회사소개 <span class="mega-en">About Us</span></a>
-        <a href="about.html#location">오시는길 <span class="mega-en">Location</span></a>
+        <a href="about.html">회사소개</a>
+        <a href="about.html#location">오시는길</a>
       </div>
       <div class="nav-mega-col">
         <span class="nav-mega-label">Services</span>
-        <a href="consulting.html">개발 전략 콘설팅 <span class="mega-en">Consulting</span></a>
-        <a href="platform.html">연구 플랫폼 <span class="mega-en">Platform</span></a>
+        <a href="consulting.html">개발 전략 컨설팅</a>
+        <a href="platform.html">연구 플랫폼</a>
       </div>
       <div class="nav-mega-col">
         <span class="nav-mega-label">Support</span>
-        <a href="support.html#qna">Q&amp;A <span class="mega-en">FAQ</span></a>
-        <a href="support.html#contact">Contact Us <span class="mega-en">문의하기</span></a>
+        <a href="support.html#qna">Q&amp;A</a>
+        <a href="support.html#contact">Contact Us</a>
       </div>
     </div>
   </div>
@@ -880,13 +893,18 @@
     /* 들어오는 슬라이드 (이미지 + 텍스트 한 몸) */
     slides[current].classList.add('active', 'is-entering');
     (function (sl) {
-      setTimeout(function () { sl.classList.remove('is-entering'); }, 1000);
+      setTimeout(function () { sl.classList.remove('is-entering'); }, 1800);
     }(slides[current]));
 
     dots[current].classList.add('active');
   }
 
   var timer = setInterval(function () { goTo(current + 1); }, 5000);
+
+  /* 페이지 로드 시 첫 슬라이드 — 이미지 고정, 텍스트만 애니메이션 */
+  void slides[0].offsetWidth;
+  slides[0].classList.add('is-text-entering');
+  setTimeout(function () { slides[0].classList.remove('is-text-entering'); }, 1200);
 
   dots.forEach(function (dot, i) {
     dot.addEventListener('click', function () {
@@ -933,6 +951,26 @@
   }
   window.addEventListener('scroll', checkScroll, { passive: true });
   checkScroll();
+
+  /* ── Mega menu hover (JS 타이머 — 커서 이동 중 안 닫힘) ── */
+  var megaEl   = document.querySelector('.nav-mega');
+  var menuEl   = document.querySelector('.nav-menu');
+  var megaTimer = null;
+
+  function openMega()  {
+    clearTimeout(megaTimer);
+    megaEl.classList.add('is-open');
+  }
+  function closeMegaDelay() {
+    megaTimer = setTimeout(function () {
+      megaEl.classList.remove('is-open');
+    }, 200);
+  }
+
+  menuEl.addEventListener('mouseenter', openMega);
+  menuEl.addEventListener('mouseleave', closeMegaDelay);
+  megaEl.addEventListener('mouseenter', openMega);
+  megaEl.addEventListener('mouseleave', closeMegaDelay);
 
   /* ── Mobile hamburger ── */
   var hamBtn = document.getElementById('nav-ham-btn');
