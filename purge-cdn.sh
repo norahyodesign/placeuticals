@@ -11,6 +11,7 @@ FILES=(
   "about.html"
   "consulting.html"
   "platform.html"
+  "research.html"
   "support.html"
   "privacy.html"
   "tokens.css"

@@ -37,7 +37,8 @@
 
 ## 🔵 인프라
 
-- [ ] GitHub 리포지토리 생성 (`norahyodesign/placeuticals`)
+- [x] GitHub 리포지토리 생성 (`norahyodesign/placeuticals`)
+- [ ] GitHub Pages 활성화 (Settings → Pages → main / root)
 - [ ] CDN URL 확정 및 purge-cdn.sh 검증
 - [ ] pre-commit hook 설치 (`cp pre-commit.sh .git/hooks/pre-commit`)
 

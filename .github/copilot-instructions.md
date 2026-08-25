@@ -468,11 +468,12 @@ HTML 또는 CSS 파일을 변경한 이후에만 필요합니다.
 
 | 파일 | 설명 |
 |------|------|
-| `index.html` | 홈페이지 (Hero / What We Do / Core Message / Consulting Highlight / Contact) |
+| `index.html` | 홈페이지 (Gero 모티프 디자인 — Hero / What We Do / Consulting Highlight / Contact) |
 | `tokens.css` | 디자인 토큰 & 컴포넌트 공유 스타일시트 |
 | `about.html` | 회사소개 탭 페이지 (회사소개·미션 / 조직 구성 / 직책 구조 / 기업부설연구소) |
 | `consulting.html` | 서비스 — 개발 전략 컨설팅 (5개 서비스 + 프로세스) |
-| `platform.html` | 서비스 — 연구 플랫폼 (Core Platform / Application / Timeline) |
+| `platform.html` | 서비스 — 통합 R&BD 플랫폼 (Overview / Structure) |
+| `research.html` | 서비스 — 연구 플랫폼 (Core Platform / Application / Timeline) |
 | `support.html` | 고객지원 탭 페이지 (Q&A / Contact Us) |
 | `privacy.html` | 개인정보처리방침 |
 | `serve.sh` | 로컬 서버 실행 |

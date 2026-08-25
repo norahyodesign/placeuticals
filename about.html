@@ -7,6 +7,205 @@
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="tokens.css">
 <style>
+:root {
+  --c-bg: #f8f6f1;
+  --c-ink: #24211c;
+  --c-muted: #6f675e;
+  --c-line: #d6d0c7;
+  --c-accent: #f26322;
+  --c-accent-soft: #fff0e8;
+  --c-panel: #f2ede4;
+  --concept-max: clamp(1160px, 76vw, 2400px);
+  --nav-h: 192px;
+  --max-w: clamp(1200px, 76vw, 2400px);
+}
+
+html, body {
+  background-color: var(--c-bg);
+  color: var(--c-ink);
+  font-family: var(--font);
+}
+
+body {
+  background-image:
+    url("img/background2.png?v=2"),
+    url("https://cdn.prod.website-files.com/65575ba0e7ef9efb9767a1e3/6867d166c76d95a0738c13f8_purple2.png"),
+    url("img/background1.png?v=5"),
+    url("https://cdn.prod.website-files.com/65575ba0e7ef9efb9767a1e3/6867d165db4e03abb6ffb381_blue2.png"),
+    url("https://cdn.prod.website-files.com/65575ba0e7ef9efb9767a1e3/6867d0c6834f915eaedde4b5_Shape.svg");
+  background-position: 100% 0, 100% 0, 0 0, 0 2000%, 50% 0;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 529px, auto, 862px, 456px, auto;
+  background-attachment: scroll, scroll, scroll, scroll, scroll;
+}
+
+#plt-nav {
+  position: absolute;
+  background: transparent;
+  border-bottom-color: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  overflow: hidden;
+  transition: background .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+#plt-nav .nav-inner {
+  padding-top: 32px;
+  padding-bottom: 24px;
+}
+
+#plt-nav .nav-logo,
+#plt-nav .nav-cta {
+  position: relative;
+  z-index: 2;
+}
+
+#plt-nav .nav-logo {
+  color: var(--c-ink);
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+}
+
+#plt-nav .nav-logo .logo-p {
+  color: var(--c-accent);
+}
+
+#plt-nav .nav-logo-img {
+  height: 68px;
+  width: auto;
+  display: block;
+}
+
+#plt-nav .nav-menu {
+  gap: 2px;
+}
+
+#plt-nav .nav-link {
+  color: var(--c-ink);
+  font-size: 15px;
+  font-weight: 600;
+  background: transparent;
+}
+
+#plt-nav .nav-item:hover > .nav-link {
+  color: var(--c-ink);
+  background: rgba(255, 255, 255, 0.45);
+}
+
+#plt-nav .nav-item.is-active > .nav-link {
+  color: var(--c-accent);
+  background: rgba(242, 99, 34, 0.12);
+}
+
+#plt-nav.scrolled {
+  background: transparent;
+  border-bottom-color: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+#plt-nav.scrolled .nav-link {
+  background: transparent;
+}
+
+.site-footer {
+  max-width: var(--concept-max);
+  margin: 0 auto;
+  padding: 88px 28px 56px;
+  background: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  border-top: 1px solid var(--c-line);
+}
+
+.site-footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 32px;
+  text-align: left;
+  margin-bottom: 32px;
+}
+
+.site-footer-brand {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--c-ink);
+  min-width: 200px;
+}
+
+.site-footer-logo-img {
+  height: 64px;
+  width: auto;
+  display: block;
+}
+
+.site-footer-desc {
+  margin: 0 0 8px;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.9;
+  color: var(--c-muted);
+}
+
+.site-footer-info {
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--c-muted);
+}
+
+.site-footer-info a {
+  color: var(--c-muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.site-footer-info a:hover {
+  color: var(--c-accent);
+}
+
+.site-footer-links {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.site-footer-links a {
+  font-size: 16px;
+  color: var(--c-muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.site-footer-links a:hover {
+  color: var(--c-ink);
+}
+
+.site-footer-bottom {
+  padding-top: 20px;
+  font-size: 12px;
+  color: var(--c-muted);
+  text-align: left;
+}
+
+@media (max-width: 720px) {
+  .site-footer-inner {
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
 /* ── Light footer ── */
 
 /* ── About page hero (탭 페이지에는 별도 hero 없이 탭 nav로 시작) ── */
@@ -180,28 +379,17 @@
 <!-- ╚══════════════════════════════════════════════════════════╝ -->
 <nav id="plt-nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><span class="logo-p">P</span>laceuticals</a>
+    <a href="index.html" class="nav-logo">
+      <img src="img/logo3.png" alt="Placeuticals" class="nav-logo-img">
+    </a>
 
     <ul class="nav-menu">
-      <li class="nav-item is-active">
-        <a href="about.html" class="nav-link">회사소개</a>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link" type="button">
-          서비스
-          <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <div class="nav-drop">
-          <a href="consulting.html">컨설팅</a>
-          <a href="platform.html">연구 플랫폼</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a href="support.html" class="nav-link">고객지원</a>
-      </li>
+      <li class="nav-item"><a href="index.html" class="nav-link">HOME</a></li>
+      <li class="nav-item is-active"><a href="about.html" class="nav-link">ABOUT</a></li>
+      <li class="nav-item"><a href="consulting.html" class="nav-link">CONSULTING</a></li>
+      <li class="nav-item"><a href="research.html" class="nav-link">RESEARCH</a></li>
+      <li class="nav-item"><a href="platform.html" class="nav-link">PLATFORM</a></li>
     </ul>
-
-    <a href="support.html#contact" class="nav-cta">상담 신청</a>
 
     <button class="nav-ham" id="nav-ham-btn" aria-label="메뉴 열기" type="button">
       <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -212,18 +400,11 @@
 <!-- 모바일 드로어 -->
 <div class="nav-drawer" id="nav-drawer">
   <div class="nav-drawer-section">
-    <div class="nav-drawer-label">회사소개</div>
-    <a href="about.html" class="is-active">회사소개</a>
-  </div>
-  <div class="nav-drawer-section">
-    <div class="nav-drawer-label">서비스</div>
-    <a href="consulting.html">컨설팅</a>
-    <a href="platform.html">연구 플랫폼</a>
-  </div>
-  <div class="nav-drawer-section">
-    <div class="nav-drawer-label">고객지원</div>
-    <a href="support.html#qna">Q&amp;A</a>
-    <a href="support.html#contact">Contact Us</a>
+    <a href="index.html">HOME</a>
+    <a href="about.html" class="is-active">ABOUT</a>
+    <a href="consulting.html">CONSULTING</a>
+    <a href="research.html">RESEARCH</a>
+    <a href="platform.html">PLATFORM</a>
   </div>
 </div>
 
@@ -526,39 +707,24 @@
     </div>
   </section>
 
-  <footer class="page-footer">
-    <div class="ft-inner">
-      <div>
-        <div class="ft-brand">Placeuticals</div>
-        <div class="ft-info">
-          <strong>주식회사 플라슈티컬즈</strong><br>
-          대표이사 이준 | 사업자번호 428-87-03429<br>
-          경기도 성남시 중원구 갈마치로 314, 3층 305~306호<br>
-          (상대원동, 성남 센트럴비즈타워 1) 우)13201
-        </div>
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div class="site-footer-brand">
+        <img src="img/logo3.png" alt="Placeuticals" class="site-footer-logo-img">
       </div>
-      <div>
-        <div class="ft-col-title">Services</div>
-        <div class="ft-col-links">
-          <a href="consulting.html">개발 전략 컨설팅</a>
-          <a href="platform.html">연구 플랫폼</a>
-        </div>
+      <div class="site-footer-info">
+        <p class="site-footer-desc">주식회사 플라슈티컬즈 · 대표 이준</p>
+        <p>전화 02-000-0000 · 팩스 02-000-0000</p>
+        <p>이메일 <a href="mailto:contact@placeuticals.co.kr">contact@placeuticals.co.kr</a></p>
+        <p>본사 경기도 성남시 중원구 갈마치로 314, 3층 305~306호(상대원동, 성남 센트럴비즈타워 1)</p>
       </div>
-      <div>
-        <div class="ft-col-title">Company</div>
-        <div class="ft-col-links">
-          <a href="about.html">회사소개</a>
-          <a href="about.html#location">오시는길</a>
-          <a href="support.html#contact">문의하기</a>
-        </div>
+      <div class="site-footer-links">
+        <a href="about.html#location">오시는길</a>
+        <a href="privacy.html">개인정보처리방침</a>
       </div>
     </div>
-    <div class="ft-bottom">
-      <div class="footer-copy">© 2026 Placeuticals Co., Ltd. All rights reserved.</div>
-      <div class="footer-links">
-        <a href="privacy.html">개인정보처리방침</a>
-        <a href="#">이용약관</a>
-      </div>
+    <div class="site-footer-bottom">
+      <span>© 2026 Placeuticals Co., Ltd. All rights reserved.</span>
     </div>
   </footer>
 
@@ -588,6 +754,14 @@
   tabs.forEach(function (tab) {
     tab.addEventListener('click', function () { activate(tab.dataset.target); });
   });
+
+  /* ── 네비게이션바 스크롤 토글 ── */
+  var navEl = document.getElementById('plt-nav');
+  var toggleNavBg = function () {
+    navEl.classList.toggle('scrolled', window.scrollY > 24);
+  };
+  toggleNavBg();
+  window.addEventListener('scroll', toggleNavBg, { passive: true });
 
   /* ── 모바일 햄버거 ── */
   var hamBtn = document.getElementById('nav-ham-btn');

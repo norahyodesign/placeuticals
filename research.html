@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>개발 전략 컨설팅 | 플라슈티컬즈</title>
+  <title>리서치 | 플라슈티컬즈</title>
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="tokens.css">
 <style>
@@ -221,78 +221,107 @@ body {
 .cta-label { color: var(--accent); }
 
 
-/* ── Service detail cards ── */
-.svc-detail-list { display: flex; flex-direction: column; gap: 20px; }
-
-.svc-detail-card {
+/* ── Platform intro card ── */
+.platform-intro {
   background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 36px 40px;
-  display: grid; grid-template-columns: 80px 1fr;
-  gap: 0 36px; align-items: flex-start;
-  transition: box-shadow .3s var(--ease), border-color .3s, transform .3s var(--ease);
-  scroll-margin-top: calc(var(--nav-h) + 24px);
+  border-radius: var(--radius); padding: 48px;
+  text-align: center; margin-bottom: 56px;
 }
-.svc-detail-card:hover {
+.platform-intro-label {
+  font: 600 11px/1 var(--mono); color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px;
+}
+.platform-intro-title {
+  font-size: clamp(22px, 3vw, 32px); font-weight: 700;
+  letter-spacing: -0.03em; color: var(--navy);
+  margin-bottom: 16px; line-height: 1.3;
+}
+.platform-intro-en {
+  font-size: 14px; color: var(--text3); font-style: italic; margin-bottom: 20px;
+}
+.platform-intro-desc {
+  font-size: 15px; line-height: 1.8; color: var(--text2);
+  max-width: 600px; margin: 0 auto;
+}
+
+/* ── Application cards (extend .card) ── */
+.app-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 36px 32px;
+  display: flex; flex-direction: column;
+  transition: box-shadow .3s var(--ease), border-color .3s, transform .3s var(--ease);
+}
+.app-card:hover {
   box-shadow: var(--shadow-md);
   border-color: rgba(0,121,250,.25);
-  transform: translateY(-3px);
+  transform: translateY(-5px);
 }
-.svc-detail-num {
-  font: 700 34px/1 var(--mono); color: var(--accent);
-  letter-spacing: -0.04em; padding-top: 4px;
-  opacity: .35;
+.app-icon {
+  width: 56px; height: 56px; background: var(--accent-light);
+  border-radius: 16px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px; transition: background .3s;
 }
-.svc-detail-content {}
-.svc-detail-en {
+.app-card:hover .app-icon { background: var(--accent); }
+.app-icon svg { width: 26px; height: 26px; color: var(--accent); transition: color .3s; }
+.app-card:hover .app-icon svg { color: var(--white); }
+.app-badge {
   font: 600 11px/1 var(--mono); color: var(--accent);
-  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px;
 }
-.svc-detail-title {
+.app-title {
   font-size: 20px; font-weight: 700; letter-spacing: -0.025em;
-  color: var(--text); margin-bottom: 12px; line-height: 1.3;
+  color: var(--text); margin-bottom: 12px;
 }
-.svc-detail-desc {
-  font-size: 14px; line-height: 1.75; color: var(--text2); margin-bottom: 20px;
-}
-.svc-detail-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.svc-detail-tag {
-  font-size: 12px; font-weight: 500;
-  padding: 5px 12px; border-radius: var(--radius-xs);
+.app-desc { font-size: 14px; line-height: 1.75; color: var(--text2); flex: 1; }
+.app-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; }
+.app-tag {
+  font-size: 12px; font-weight: 500; padding: 4px 10px;
+  border-radius: var(--radius-xs);
   background: var(--accent-light); color: var(--accent);
   border: 1px solid rgba(0,121,250,.15);
 }
 
-/* ── Process strip ── */
-.process-strip {
+/* ── Development timeline strip ── */
+.dev-timeline {
   display: flex; align-items: flex-start; gap: 0;
   justify-content: center; flex-wrap: wrap;
 }
-.proc-step {
+.dev-step {
   display: flex; flex-direction: column; align-items: center;
-  gap: 12px; text-align: center; flex: 1; min-width: 120px; max-width: 180px;
+  gap: 12px; text-align: center; flex: 1; min-width: 110px; max-width: 160px;
 }
-.proc-step-num {
-  width: 52px; height: 52px; background: var(--accent);
-  border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font: 700 14px/1 var(--mono); color: var(--white); flex-shrink: 0;
+.dev-step-dot {
+  width: 14px; height: 14px; background: var(--accent);
+  border-radius: 50%; border: 3px solid var(--accent-light);
+  box-shadow: 0 0 0 3px rgba(0,121,250,.15);
+  flex-shrink: 0;
 }
-.proc-step-title { font-size: 14px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
-.proc-step-desc { font-size: 12px; line-height: 1.6; color: var(--text2); }
-.proc-arrow {
-  display: flex; align-items: center; padding-top: 16px; flex-shrink: 0;
+.dev-step-title { font-size: 14px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+.dev-step-desc { font-size: 12px; line-height: 1.6; color: var(--text2); }
+.dev-arrow {
+  display: flex; align-items: flex-start; padding-top: 3px; flex-shrink: 0;
   color: var(--border);
 }
-.proc-arrow svg { width: 20px; height: 20px; }
+.dev-arrow svg { width: 20px; height: 20px; }
+
+/* ── Core message quote ── */
+.platform-quote {
+  background: var(--navy); border-radius: var(--radius);
+  padding: 48px; text-align: center; margin-top: 56px;
+}
+.platform-quote-text {
+  font-size: clamp(18px, 2.5vw, 26px); font-weight: 700;
+  line-height: 1.5; letter-spacing: -0.03em;
+  color: var(--white); margin-bottom: 12px;
+}
+.platform-quote-text em { color: var(--accent2); font-style: normal; }
+.platform-quote-sub { font-size: 14px; color: rgba(255,255,255,.5); }
 
 @media (max-width: 768px) {
-  .svc-detail-card {
-    grid-template-columns: 1fr;
-    padding: 28px 24px;
-  }
-  .svc-detail-num { font-size: 24px; margin-bottom: 8px; }
-  .process-strip { flex-direction: column; align-items: center; gap: 16px; }
-  .proc-arrow { transform: rotate(90deg); padding-top: 0; }
-  .proc-step { max-width: 100%; }
+  .platform-intro { padding: 32px 24px; }
+  .dev-timeline { flex-direction: column; align-items: center; gap: 16px; }
+  .dev-arrow { transform: rotate(90deg); padding-top: 0; }
+  .dev-step { max-width: 100%; }
 }
 </style>
 </head>
@@ -310,8 +339,8 @@ body {
     <ul class="nav-menu">
       <li class="nav-item"><a href="index.html" class="nav-link">HOME</a></li>
       <li class="nav-item"><a href="about.html" class="nav-link">ABOUT</a></li>
-      <li class="nav-item is-active"><a href="consulting.html" class="nav-link">CONSULTING</a></li>
-      <li class="nav-item"><a href="research.html" class="nav-link">RESEARCH</a></li>
+      <li class="nav-item"><a href="consulting.html" class="nav-link">CONSULTING</a></li>
+      <li class="nav-item is-active"><a href="research.html" class="nav-link">RESEARCH</a></li>
       <li class="nav-item"><a href="platform.html" class="nav-link">PLATFORM</a></li>
     </ul>
 
@@ -326,8 +355,8 @@ body {
   <div class="nav-drawer-section">
     <a href="index.html">HOME</a>
     <a href="about.html">ABOUT</a>
-    <a href="consulting.html" class="is-active">CONSULTING</a>
-    <a href="research.html">RESEARCH</a>
+    <a href="consulting.html">CONSULTING</a>
+    <a href="research.html" class="is-active">RESEARCH</a>
     <a href="platform.html">PLATFORM</a>
   </div>
 </div>
@@ -339,119 +368,89 @@ body {
   <!-- ╚══════════════════════════════════════════════════════════╝ -->
   <section class="page-hero">
     <div class="page-hero-inner">
-      <div class="hero-overline">Services — Consulting</div>
-      <h1>임상 진입 및<br>개발 전략 <span>컨설팅</span></h1>
-      <p>연구개발부터 인증, 비임상, 임상까지 전주기 개발 전략을 설계합니다.</p>
+      <div class="hero-overline">Services — Research</div>
+      <h1>태반 유래 MSC &amp;<br><span>엑소좀 연구 플랫폼</span></h1>
+      <p>줄기세포, 엑소좀 및 바이오소재 기반 재생의료 기술을 하나의 플랫폼에서 의약품·동물의약품·화장품으로 확장합니다.</p>
       <div class="hero-tags">
+        <span class="hero-tag">Placenta-derived MSC</span>
+        <span class="hero-tag">Exosome</span>
+        <span class="hero-tag">R&amp;BD Platform</span>
         <span class="hero-tag">Backward Design</span>
-        <span class="hero-tag">첨단재생의료</span>
-        <span class="hero-tag">비임상 설계</span>
-        <span class="hero-tag">기업부설연구소</span>
       </div>
     </div>
   </section>
 
 
   <!-- ╔══════════════════════════════════════════════════════════╗ -->
-  <!-- ║  SERVICES                                                ║ -->
+  <!-- ║  CORE PLATFORM                                           ║ -->
   <!-- ╚══════════════════════════════════════════════════════════╝ -->
   <section class="section">
     <div class="inner">
-      <div class="section-label">Consulting Services</div>
-      <h2 class="section-h2">5가지 <span>전략 컨설팅</span></h2>
-      <p class="section-sub">임상 진입 목표에서 거꾸로 설계하는 Backward Design 방법론을 기반으로, 각 단계에 최적화된 전략을 제공합니다.</p>
+      <div class="section-label">Core Platform</div>
+      <h2 class="section-h2">태반 유래 재생의료 <span>핵심 플랫폼</span></h2>
+      <p class="section-sub">임상 진입을 목표로 단계별 개발 전략을 수행하는 통합 R&amp;BD 플랫폼입니다.</p>
 
-      <div class="svc-detail-list">
+      <div class="platform-intro">
+        <div class="platform-intro-label">Platform Overview</div>
+        <div class="platform-intro-title">태반 유래 줄기세포 및 엑소좀 기반 플랫폼</div>
+        <div class="platform-intro-en">Placenta-derived MSC &amp; Exosome Platform</div>
+        <p class="platform-intro-desc">
+          플라슈티컬즈는 태반 유래 줄기세포(MSC) 및 엑소좀 연구를 핵심 플랫폼으로,
+          의약품, 동물의약품, 화장품 등 다양한 산업 분야로 응용 기술을 확장합니다.
+          Backward Design 기반 개발 전략으로 연구부터 임상까지 일관된 로드맵을 제공합니다.
+        </p>
+      </div>
+    </div>
+  </section>
 
-        <div id="svc1" class="svc-detail-card">
-          <div class="svc-detail-num">01</div>
-          <div class="svc-detail-content">
-            <div class="svc-detail-en">Backward Design Strategy</div>
-            <div class="svc-detail-title">Backward Design 컨설팅</div>
-            <p class="svc-detail-desc">
-              임상 요구사항 기반 개발 전략 설계. 임상 진입이라는 목표를 먼저 정의하고,
-              그 요건에 맞춰 CMC · 비임상 · 공정개발을 역순으로 설계하는 방법론을 적용합니다.
-              반복시험을 최소화하고 통합 개발 로드맵을 수립합니다.
-            </p>
-            <div class="svc-detail-tags">
-              <span class="svc-detail-tag">임상 요구사항 기반 설계</span>
-              <span class="svc-detail-tag">개발 전략 통합 로드맵</span>
-              <span class="svc-detail-tag">반복시험 최소화</span>
-              <span class="svc-detail-tag">CMC 전략</span>
-            </div>
+
+  <section class="section alt" id="application">
+    <div class="inner">
+      <div class="section-label">Application</div>
+      <h2 class="section-h2">3가지 <span>적용 분야</span></h2>
+      <p class="section-sub">하나의 플랫폼으로 다양한 산업으로 확장합니다.</p>
+
+      <div class="card-grid-3">
+
+        <div class="app-card">
+          <div class="app-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M9 3v11a3 3 0 0 0 6 0V3M6 3h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="app-badge">Pharmaceutical</div>
+          <div class="app-title">의약품</div>
+          <p class="app-desc">임상 진입을 목표로 하는 재생의료 치료제 개발. 첨단재생의료법 기반 임상연구 및 IND 승인 전략을 포함합니다.</p>
+          <div class="app-tags">
+            <span class="app-tag">재생의료 치료제</span>
+            <span class="app-tag">임상 진입</span>
+            <span class="app-tag">IND 전략</span>
           </div>
         </div>
 
-        <div id="svc2" class="svc-detail-card">
-          <div class="svc-detail-num">02</div>
-          <div class="svc-detail-content">
-            <div class="svc-detail-en">Advanced Regenerative Medicine Clinical Research</div>
-            <div class="svc-detail-title">첨단재생의료 임상연구 컨설팅</div>
-            <p class="svc-detail-desc">
-              첨단재생의료법상 임상연구 계획 수립 및 승인 전략을 지원합니다.
-              연구계획서 작성부터 첨단재생의료위원회 심의 대응, IRB 승인 전략까지
-              임상 진입을 위한 전주기 행정·전략 컨설팅을 제공합니다.
-            </p>
-            <div class="svc-detail-tags">
-              <span class="svc-detail-tag">연구계획서 작성</span>
-              <span class="svc-detail-tag">첨단재생의료위원회 대응</span>
-              <span class="svc-detail-tag">IRB 대응</span>
-              <span class="svc-detail-tag">Endpoint 설계</span>
-            </div>
+        <div class="app-card">
+          <div class="app-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7v-2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M7 9c2.5-1.5 7.5-1.5 10 0M7 15c2.5 1.5 7.5 1.5 10 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="app-badge">Veterinary</div>
+          <div class="app-title">동물의약품</div>
+          <p class="app-desc">반려동물 재생의료 치료제 개발. 동물용 의약품 허가 기준에 맞춘 비임상·임상 전략을 설계합니다.</p>
+          <div class="app-tags">
+            <span class="app-tag">반려동물 재생의료</span>
+            <span class="app-tag">동물 임상</span>
+            <span class="app-tag">허가 전략</span>
           </div>
         </div>
 
-        <div id="svc3" class="svc-detail-card">
-          <div class="svc-detail-num">03</div>
-          <div class="svc-detail-content">
-            <div class="svc-detail-en">Implementing Institution Certification</div>
-            <div class="svc-detail-title">첨단재생의료 실시기관 인증 컨설팅</div>
-            <p class="svc-detail-desc">
-              첨단재생의료 실시기관 인증 획득을 위한 개발 환경 구축 전략을 제공합니다.
-              시설 및 장비 설계부터 표준운영절차(SOP) 수립, 품질관리 체계 구축까지
-              인증 요건에 맞춘 종합 컨설팅을 진행합니다.
-            </p>
-            <div class="svc-detail-tags">
-              <span class="svc-detail-tag">시설 및 장비 설계</span>
-              <span class="svc-detail-tag">SOP 구축</span>
-              <span class="svc-detail-tag">품질관리 체계 수립</span>
-            </div>
+        <div class="app-card">
+          <div class="app-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2a5 5 0 1 0 0 10A5 5 0 0 0 12 2zM12 14c-5.33 0-8 2.67-8 4v2h16v-2c0-1.33-2.67-4-8-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
-        </div>
-
-        <div id="svc4" class="svc-detail-card">
-          <div class="svc-detail-num">04</div>
-          <div class="svc-detail-content">
-            <div class="svc-detail-en">Corporate R&amp;D Institute Certification</div>
-            <div class="svc-detail-title">기업부설연구소 인정 컨설팅</div>
-            <p class="svc-detail-desc">
-              연구개발 조직 구축 및 기업부설연구소 인정 전략을 수립합니다.
-              조직 설계, 연구개발 체계 구축, 인정 신청 대응까지
-              체계적인 R&amp;D 조직 구성을 지원합니다.
-            </p>
-            <div class="svc-detail-tags">
-              <span class="svc-detail-tag">조직 설계</span>
-              <span class="svc-detail-tag">연구개발 체계 구축</span>
-              <span class="svc-detail-tag">인정 대응</span>
-            </div>
-          </div>
-        </div>
-
-        <div id="svc5" class="svc-detail-card">
-          <div class="svc-detail-num">05</div>
-          <div class="svc-detail-content">
-            <div class="svc-detail-en">Non-clinical Study Design</div>
-            <div class="svc-detail-title">비임상 시험 설계 컨설팅</div>
-            <p class="svc-detail-desc">
-              임상 진입을 위한 최적화된 비임상 전략을 설계합니다.
-              In vitro / In vivo 모델 선정부터 효능·독성 시험 계획,
-              GLP(Good Laboratory Practice) 전략까지 체계적인 비임상 로드맵을 제공합니다.
-            </p>
-            <div class="svc-detail-tags">
-              <span class="svc-detail-tag">In vitro / In vivo 모델</span>
-              <span class="svc-detail-tag">효능 및 독성 시험</span>
-              <span class="svc-detail-tag">GLP 전략</span>
-            </div>
+          <div class="app-badge">Cosmetics</div>
+          <div class="app-title">화장품</div>
+          <p class="app-desc">고기능성 바이오 소재 기반 화장품 개발. 태반 유래 성분의 기능성 원료 개발 및 제품화를 지원합니다.</p>
+          <div class="app-tags">
+            <span class="app-tag">기능성 바이오소재</span>
+            <span class="app-tag">원료 개발</span>
+            <span class="app-tag">제품화</span>
           </div>
         </div>
 
@@ -460,64 +459,67 @@ body {
   </section>
 
 
-  <!-- ╔══════════════════════════════════════════════════════════╗ -->
-  <!-- ║  PROCESS                                                 ║ -->
-  <!-- ╚══════════════════════════════════════════════════════════╝ -->
-  <section class="section alt">
+  <section class="section" id="timeline">
     <div class="inner">
-      <div class="section-label">How We Work</div>
-      <h2 class="section-h2">컨설팅 <span>프로세스</span></h2>
-      <p class="section-sub">초기 진단부터 임상 진입까지 단계별 맞춤 전략을 제공합니다.</p>
+      <div class="section-label">Development Timeline</div>
+      <h2 class="section-h2">단계별 <span>개발 흐름</span></h2>
+      <p class="section-sub">임상 진입을 목표로 단계별 개발 전략을 수행합니다.</p>
 
-      <div class="process-strip">
+      <div class="dev-timeline">
 
-        <div class="proc-step">
-          <div class="proc-step-num">01</div>
-          <div class="proc-step-title">초기 진단</div>
-          <p class="proc-step-desc">현재 연구 단계 및 임상 목표 파악</p>
+        <div class="dev-step">
+          <div class="dev-step-dot"></div>
+          <div class="dev-step-title">기초 연구</div>
+          <p class="dev-step-desc">MSC / 엑소좀 특성 분석 및 작용기전 규명</p>
         </div>
 
-        <div class="proc-arrow">
+        <div class="dev-arrow">
           <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
 
-        <div class="proc-step">
-          <div class="proc-step-num">02</div>
-          <div class="proc-step-title">갭 분석</div>
-          <p class="proc-step-desc">임상 진입 요건 대비 현황 분석</p>
+        <div class="dev-step">
+          <div class="dev-step-dot"></div>
+          <div class="dev-step-title">비임상</div>
+          <p class="dev-step-desc">In vitro / In vivo 효능·독성 시험</p>
         </div>
 
-        <div class="proc-arrow">
+        <div class="dev-arrow">
           <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
 
-        <div class="proc-step">
-          <div class="proc-step-num">03</div>
-          <div class="proc-step-title">전략 설계</div>
-          <p class="proc-step-desc">Backward Design 기반 개발 로드맵 수립</p>
+        <div class="dev-step">
+          <div class="dev-step-dot"></div>
+          <div class="dev-step-title">CMC</div>
+          <p class="dev-step-desc">공정개발, 시료생산, 품질관리</p>
         </div>
 
-        <div class="proc-arrow">
+        <div class="dev-arrow">
           <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
 
-        <div class="proc-step">
-          <div class="proc-step-num">04</div>
-          <div class="proc-step-title">실행 지원</div>
-          <p class="proc-step-desc">각 단계별 문서·인증·심의 지원</p>
+        <div class="dev-step">
+          <div class="dev-step-dot"></div>
+          <div class="dev-step-title">임상</div>
+          <p class="dev-step-desc">임상연구 계획 승인 및 임상 진입</p>
         </div>
 
-        <div class="proc-arrow">
+        <div class="dev-arrow">
           <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
 
-        <div class="proc-step">
-          <div class="proc-step-num">05</div>
-          <div class="proc-step-title">임상 진입</div>
-          <p class="proc-step-desc">승인 및 임상 진입 완료</p>
+        <div class="dev-step">
+          <div class="dev-step-dot" style="background: var(--accent); box-shadow: 0 0 0 5px rgba(0,121,250,.2);"></div>
+          <div class="dev-step-title">상용화</div>
+          <p class="dev-step-desc">허가 완료 및 제품 출시</p>
         </div>
 
       </div>
+
+      <div class="platform-quote">
+        <div class="platform-quote-text">하나의 플랫폼으로<br><em>다양한 산업</em>으로 확장</div>
+        <div class="platform-quote-sub">Backward Design 기반 개발 전략 — 기초연구부터 상용화까지</div>
+      </div>
+
     </div>
   </section>
 
@@ -528,8 +530,8 @@ body {
   <section class="cta-section">
     <div class="cta-inner">
       <div class="cta-label">Contact Us</div>
-      <h2>지금 바로<br><span>전략 상담</span>을 시작하세요</h2>
-      <p>어떤 단계에서든, 임상 진입을 목표로 하는 모든 기업의 문의를 환영합니다.</p>
+      <h2>공동 연구 및<br><span>협업</span>을 환영합니다</h2>
+      <p>재생의료 연구, 플랫폼 활용, 컨설팅 등 모든 협업 문의를 환영합니다.</p>
       <div class="cta-btns">
         <a href="support.html#contact" class="btn-primary">문의하기 →</a>
         <a href="mailto:contact@placeuticals.co.kr" class="btn-outline">이메일로 보내기</a>
