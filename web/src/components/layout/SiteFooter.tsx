@@ -1,36 +1,16 @@
 import { Link } from 'react-router-dom'
-import { COMPANY, NAV_ITEMS, NAV_MENU } from '@/content/site'
+import { COMPANY, NAV_MENU } from '@/content/site'
 import { asset } from '@/lib/asset'
 
 /*
- * 푸터 — 왼쪽 로고 + 저작권, 오른쪽 4컬럼 링크, 맨 아래 거대한 회색 워드마크가 잘려 나가는 구성.
- * 컬럼은 상단 메뉴(NAV_MENU)의 페이지·하위 섹션 + 회사 정보로 채운다. 데모의 Socials/Register 같은
- * 자리엔 실제로 없는 링크를 넣지 않는다.
+ * 푸터 — 왼쪽 로고 + 저작권, 오른쪽 링크 컬럼, 맨 아래 거대한 회색 워드마크가 잘려 나가는 구성.
+ * 컬럼 제목은 상단 메뉴의 상위 항목(HOME 제외: ABOUT~CONTACT)이고, 그 아래에 각 페이지의 하위 섹션을
+ * 세로로 쌓는다. 데모의 Socials/Register 같은 자리엔 실제로 없는 링크를 넣지 않는다.
  * 불투명 배경(bg-muted) — 홈의 고정 백드롭(점 파동)이 뒤로 비치지 않게.
  */
 
-const COLUMNS = [
-  {
-    title: '페이지',
-    // 상단 메뉴와 같은 항목·같은 순서. NAV_ITEMS는 SiteHeader가 쓰는 바로 그 목록이라 한쪽만 바뀔 일이 없다.
-    links: NAV_ITEMS.map((item) => ({ label: item.label, to: item.to })),
-  },
-  {
-    title: '컨설팅',
-    links: NAV_MENU.find((g) => g.to === '/consulting')?.children?.map((c) => ({ label: c.label, to: c.to })) ?? [],
-  },
-  {
-    title: '회사',
-    links: NAV_MENU.find((g) => g.to === '/about')?.children?.map((c) => ({ label: c.label, to: c.to })) ?? [],
-  },
-  {
-    title: '문의',
-    links: [
-      { label: '상담 신청', to: '/support#contact' },
-      { label: '개인정보처리방침', to: '/privacy' },
-    ],
-  },
-]
+// HOME은 왼쪽 로고가 이미 홈 링크라 컬럼으로 두지 않는다.
+const COLUMNS = NAV_MENU.filter((group) => group.to !== '/')
 
 export function SiteFooter() {
   return (
@@ -56,18 +36,27 @@ export function SiteFooter() {
             </p>
             <p>{COMPANY.address}</p>
           </div>
+          {/* 개인정보처리방침 — 어느 상위 메뉴에도 속하지 않아 저작권 쪽에 둔다 (일반적인 자리) */}
+          <Link
+            to="/privacy"
+            className="mt-6 inline-block text-xs leading-5 text-muted-foreground transition-colors hover:text-foreground"
+          >
+            개인정보처리방침
+          </Link>
         </div>
 
-        {/* 오른쪽 — 4컬럼 링크 */}
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+        {/* 오른쪽 — 상위 메뉴 하나가 컬럼 하나. 제목도 그 페이지로 가는 링크다 */}
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
           {COLUMNS.map((col) => (
-            <div key={col.title}>
-              <p className="text-sm font-bold text-foreground">{col.title}</p>
+            <div key={col.to}>
+              <Link to={col.to} className="text-sm font-bold text-foreground transition-colors hover:text-primary">
+                {col.label}
+              </Link>
               <ul className="mt-4 space-y-3">
-                {col.links.map((link) => (
-                  <li key={link.to}>
-                    <Link to={link.to} className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                      {link.label}
+                {col.children?.map((child) => (
+                  <li key={child.to}>
+                    <Link to={child.to} className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+                      {child.label}
                     </Link>
                   </li>
                 ))}

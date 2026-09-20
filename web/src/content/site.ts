@@ -14,10 +14,10 @@ export const NAV_ITEMS: NavItem[] = [
 ]
 
 /*
- * 드롭다운 메뉴(shadcn NavigationMenu)용 계층 구조 — SiteHeader(전 페이지 공통)가 쓴다.
+ * 메뉴 계층 구조 — 지금은 푸터(SiteFooter)가 컬럼을 만드는 데 쓴다.
+ * (상단 메뉴의 호버 드롭다운을 없앤 뒤로 SiteHeader는 NAV_ITEMS만 쓴다.)
  * 하위 항목의 id는 각 페이지의 <Section id="..."> 와 같아야 한다 (해시 링크로 그 섹션에 착지).
- * (예전엔 페이지마다 하단 탭바(TabNav)가 같은 id를 썼지만, 이 드롭다운으로 대체되어 제거됨)
- * description은 드롭다운 설명 문구용 초안 — 확정 카피 아님.
+ * description은 설명 문구용 초안 — 지금 화면에 쓰이는 곳은 없다.
  */
 export type NavChild = { label: string; to: string; description: string }
 export type NavGroup = { label: string; to: string; children?: NavChild[] }
@@ -59,7 +59,14 @@ export const NAV_MENU: NavGroup[] = [
       { label: '구조', to: '/platform#structure', description: '플랫폼을 구성하는 모듈과 연결 방식' },
     ],
   },
-  { label: 'CONTACT', to: '/support' },
+  {
+    label: 'CONTACT',
+    to: '/support',
+    children: [
+      { label: '자주 묻는 질문', to: '/support#qna', description: '상담 전에 많이 받는 질문과 답변' },
+      { label: '상담 신청', to: '/support#contact', description: '연구 단계와 목표를 알려주시면 전략을 함께 검토합니다' },
+    ],
+  },
 ]
 
 
