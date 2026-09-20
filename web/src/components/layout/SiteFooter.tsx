@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { COMPANY, NAV_MENU } from '@/content/site'
+import { COMPANY, NAV_ITEMS, NAV_MENU } from '@/content/site'
 import { asset } from '@/lib/asset'
 
 /*
@@ -12,7 +12,8 @@ import { asset } from '@/lib/asset'
 const COLUMNS = [
   {
     title: '페이지',
-    links: NAV_MENU.filter((g) => g.to !== '/').map((g) => ({ label: g.label, to: g.to })),
+    // 상단 메뉴와 같은 항목·같은 순서. NAV_ITEMS는 SiteHeader가 쓰는 바로 그 목록이라 한쪽만 바뀔 일이 없다.
+    links: NAV_ITEMS.map((item) => ({ label: item.label, to: item.to })),
   },
   {
     title: '컨설팅',
