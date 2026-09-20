@@ -1,0 +1,78 @@
+/*
+ * home-bg.css — 홈 배경.
+ *
+ * 구조: 뷰포트에 고정된 백드롭 한 장(.plt-home-backdrop)이 z-index:-1로 깔리고,
+ * 페이지 섹션들은 배경 없이 그 위로 스크롤된다. 캔버스를 페이지 높이만큼 늘리지 않고
+ * 뷰포트 크기 하나로 고정하는 이유: WebGL 텍스처가 수천 px가 되면 GPU가 감당 못 한다.
+ *
+ * 레이어 (아래→위):
+ *   1. .plt-root 배경색 (#faf9f6)  — theme.css의 isolation: isolate가 이 끼워넣기를 가능하게 한다
+ *   2. .plt-home-backdrop__glow — 브랜드 색 번짐 (이전 gero.ai CDN 이미지 5장을 대체, 외부 요청 0)
+ *   3. CursorRingField 캔버스 — 점 파동 (HomeBackdrop.tsx)
+ *   4. .plt-home-backdrop__scrim — 페이지 전체에 캔버스색 옅은 막 (본문 가독성)
+ *   5. 섹션 콘텐츠
+ *
+ * 불투명 배경을 가진 섹션(CTA 배너 네이비, 푸터 bg-muted)은 그 자리에서 백드롭을 가린다.
+ */
+.plt-home-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.plt-home-backdrop__glow {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-brand-canvas);
+  background-image:
+    /* 우상단 — 퍼플 */
+    radial-gradient(
+      42% 38% at 100% 0%,
+      color-mix(in srgb, var(--color-gero-purple) 34%, transparent) 0%,
+      transparent 70%
+    ),
+    /* 좌상단 — 퍼플 라이트 */
+    radial-gradient(
+      48% 30% at 0% 0%,
+      color-mix(in srgb, var(--color-gero-purple-light) 22%, transparent) 0%,
+      transparent 72%
+    ),
+    /* 좌측 아래 — 퍼플 딥 */
+    radial-gradient(
+      38% 30% at 0% 100%,
+      color-mix(in srgb, var(--color-gero-purple-deep) 26%, transparent) 0%,
+      transparent 72%
+    );
+  background-repeat: no-repeat;
+}
+
+/* 페이지 전체 스크림 — 히어로 스크림(.plt-hero__scrim)보다 훨씬 옅고 방향 없음.
+   본문 섹션은 가운데 정렬이라 좌우 기울기를 주면 오히려 어색하다. */
+/*
+ * 페이지 전체 막 — 이 한 장이 본문 가독성을 담당한다.
+ *
+ * 한때 [data-quiet] 블록마다 별도 막을 깔았지만 두 가지 문제로 걷어냈다:
+ *  1) blur()를 쓰면 블록마다 GPU 필터 패스가 생겨 마우스 이동이 버벅였다
+ *  2) blur를 그라디언트로 바꾸니 사각형 덩어리가 눈에 띄었다
+ * 대신 이 막을 조금 올리고, 점 자체를 옅게(셰이더 0.6배) + 커서가 텍스트 위면 링이 따라오지 않게
+ * 하는 쪽으로 해결한다. [data-quiet] 속성은 그 커서 회피용으로만 남아 있다.
+ */
+.plt-home-backdrop__scrim {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--color-brand-canvas) 52%, transparent);
+}
+
+/* 콘텐츠 래퍼 — 좌우 패딩만 담당. 배경은 백드롭이 맡는다. */
+.plt-home-bg {
+  padding-left: 6.25rem;
+  padding-right: 6.25rem;
+}
+
+@media screen and (max-width: 991px) {
+  .plt-home-bg {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}

@@ -1,0 +1,76 @@
+/*
+ * scoped-reset.css — .plt-root 하위에만 적용되는 최소 리셋
+ * Tailwind preflight를 전역 import하지 않는 대신, 아임웹 등 호스트 페이지의
+ * 전역 스타일(body *, a, button 등)이 우리 위젯에 상속되는 것을 여기서 차단한다.
+ *
+ * ⚠️ PoC에서 발견한 사실: `.plt-root button`처럼 조상 클래스를 selector에 포함하면
+ * specificity가 (0,1,1)이 되어 Tailwind 유틸리티 클래스(예: .bg-primary, (0,1,0))보다
+ * 높아져 버려 우리가 만든 리셋이 우리 자신의 유틸리티를 덮어써 버린다.
+ * `:where(.plt-root)`로 감싸면 그 부분의 specificity가 0이 되어 순수 element selector와
+ * 동일한 우선순위를 유지하면서도(=Tailwind preflight와 동일한 전략) 스코프는 제한된다.
+ */
+:where(.plt-root),
+:where(.plt-root) *,
+:where(.plt-root) *::before,
+:where(.plt-root) *::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: var(--border, currentColor);
+}
+
+.plt-root {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+:where(.plt-root) h1,
+:where(.plt-root) h2,
+:where(.plt-root) h3,
+:where(.plt-root) h4,
+:where(.plt-root) p,
+:where(.plt-root) figure,
+:where(.plt-root) blockquote,
+:where(.plt-root) dl,
+:where(.plt-root) dd {
+  margin: 0;
+}
+
+:where(.plt-root) h1,
+:where(.plt-root) h2,
+:where(.plt-root) h3,
+:where(.plt-root) h4,
+:where(.plt-root) button,
+:where(.plt-root) input,
+:where(.plt-root) optgroup,
+:where(.plt-root) select,
+:where(.plt-root) textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:where(.plt-root) button {
+  background: none;
+  cursor: pointer;
+  text-align: inherit;
+}
+
+:where(.plt-root) a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+:where(.plt-root) ul,
+:where(.plt-root) ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+:where(.plt-root) img,
+:where(.plt-root) svg,
+:where(.plt-root) video {
+  display: block;
+  max-width: 100%;
+  vertical-align: middle;
+}

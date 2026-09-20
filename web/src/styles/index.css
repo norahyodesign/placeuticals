@@ -1,0 +1,66 @@
+/*
+ * index.css — 스타일 레이어 조립 (마이그레이션 플랜 §7, 부록 A)
+ * 의도적으로 tailwindcss/preflight.css는 import하지 않는다 (ADR-4: 호스트 페이지 오염 방지).
+ *
+ * ⚠️ PoC에서 발견한 사실: `layer(utilities)`로 CSS Cascade Layer에 넣으면,
+ * CSS 스펙상 "레이어에 속한 규칙은 레이어가 없는 규칙보다 항상 우선순위가 낮다"는
+ * 규칙 때문에 호스트(아임웹) 페이지의 평범한 `button{...}` 같은 비-레이어 스타일에게
+ * specificity와 무관하게 항상 패배한다. 그래서 여기서는 레이어를 쓰지 않는다.
+ */
+@import 'tailwindcss/theme.css';
+@import 'tailwindcss/utilities.css';
+/* shadcn 컴포넌트(navigation-menu, sheet, dialog)의 animate-in/fade-in/zoom-in 유틸리티.
+   리셋 없이 keyframe·유틸리티만 추가하므로 preflight 미사용 정책(ADR-4)과 충돌하지 않는다. */
+@import 'tw-animate-css';
+
+@import './theme.css';
+@import './scoped-reset.css';
+@import './home-bg.css';
+@import './hero-lab.css';
+@import './pillar-showcase.css';
+@import './card-hover.css';
+@import './cover.css';
+@import './hero-aurora.css';
+@import './reveal.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * 루트 폰트 크기 — 해상도가 올라가도 글자·여백 크기는 그대로 둔다.
+ *
+ * rem 기반인 모든 값(Tailwind의 글자 크기·여백·max-w·radius)이 이 값을 따라가므로, 여기를
+ * 뷰포트에 비례시키면 큰 모니터에서 화면 전체가 확대된다. 실제로 그렇게 해 봤더니
+ * (1512→16px, 2560→27.09px) 2560에서 본문 27px·제목 81px이라 너무 컸고, 1.25배로 낮춰도
+ * 여전히 컸다. 그래서 확대를 하지 않는다 — 2560에서도 1512와 똑같은 글자 크기로 보이고,
+ * 넓어진 만큼은 좌우 여백이 가져간다 (일반적인 웹사이트 동작).
+ *
+ * 1512 미만 구간도 같은 16px이고, 좁은 화면 대응은 기존 반응형(md/lg 브레이크포인트)이 맡는다.
+ *
+ * 큰 화면에서 조금 키우고 싶어지면 여기만 바꾸면 된다. 예: 2560에서 1.125배로 키우려면
+ *   font-size: clamp(16px, calc(13.11px + 0.1908vw), 18px)
+ *
+ * ⚠️ rem은 항상 문서 루트 기준이라 .plt-root 안에 둘 수 없다. 현재 배포 형태(GitHub Pages를
+ *    iframe으로 감싸는 방식)에서는 이 문서가 우리 것이라 문제없지만, 호스트 페이지에 직접
+ *    임베드하는 방식으로 되돌린다면 이 규칙은 빼야 한다 (ADR-4: 호스트 오염 방지).
+ */
+:root {
+  font-size: 16px;
+}
+
+/*
+ * 본문 컨테이너 폭 — 글자 크기는 해상도와 무관하게 고정이므로, 큰 모니터에서는 대신 폭을 넓혀
+ * 좌우 여백이 과하게 남지 않게 한다. (2560에서 64rem 컨테이너면 좌우가 704px씩 비었다.)
+ *   --plt-container:      섹션 본문 (Section, 홈 섹션)
+ *   --plt-container-wide: 헤더·히어로·푸터 — 본문보다 한 단계 넓은 바깥 틀
+ * 1920까지는 그대로(60% 정도 차지해 충분히 안정적), 2200을 넘는 QHD급부터만 넓힌다.
+ */
+:root {
+  --plt-container: 64rem; /* = max-w-5xl */
+  --plt-container-wide: 72rem; /* = max-w-6xl */
+}
+@media (min-width: 2200px) {
+  :root {
+    --plt-container: 80rem;
+    --plt-container-wide: 88rem;
+  }
+}

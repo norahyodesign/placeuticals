@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>아임웹 페이지 시뮬레이션 — plt-embed PoC</title>
+<style>
+  /*
+   * 아래는 실제 아임웹 테마가 흔히 선언하는 "전역" 스타일을 흉내낸 것.
+   * (body 전체 폰트/색, a 밑줄, button 리셋 무시, ul 마커, h2 마진 등)
+   * 목적: .plt-root 스코프 리셋이 이걸 얼마나 잘 막아내는지 확인.
+   */
+  * { box-sizing: content-box; }
+  body {
+    margin: 0;
+    font-family: Georgia, 'Nanum Myeongjo', serif;
+    color: #444;
+    background: #eef1f5;
+    line-height: 2.2;
+  }
+  a { color: #1a73e8; text-decoration: underline; }
+  h1, h2, h3 { font-family: Georgia, serif; margin: 24px 0; color: #111; }
+  ul { list-style: disc; margin: 16px 0; padding-left: 40px; }
+  button { border: 2px solid #999; background: #ddd; padding: 10px 20px; font-size: 18px; border-radius: 0; }
+  p { margin: 16px 0; }
+
+  .imweb-header { background: #202b3c; color: #fff; padding: 20px 32px; font-weight: bold; }
+  .imweb-native-block { max-width: 720px; margin: 24px auto; padding: 16px 24px; background: #fff; border: 1px dashed #bbb; }
+  .imweb-widget-slot { max-width: 720px; margin: 24px auto; padding: 0; }
+  .imweb-footer { text-align: center; color: #999; padding: 40px; font-size: 12px; }
+</style>
+</head>
+<body>
+  <header class="imweb-header">아임웹 스타일 헤더 (호스트 페이지 — 실제 사이트 테마 흉내)</header>
+
+  <div class="imweb-native-block">
+    <h2>이 블록은 순수 아임웹 네이티브 콘텐츠입니다</h2>
+    <p>Georgia 세리프 폰트, 파란 밑줄 링크, 회색 버튼 — 이 스타일이 아래 위젯 영역까지 침투하면 PoC 실패입니다.</p>
+    <a href="#">일반 링크 예시</a>
+    <ul><li>목록 아이템 1</li><li>목록 아이템 2</li></ul>
+    <button>네이티브 버튼</button>
+  </div>
+
+  <div class="imweb-widget-slot">
+    <!-- 실제 아임웹 "HTML 위젯"에 삽입할 마크업 그대로 -->
+    <div data-plt-page="poc"></div>
+    <script src="./plt-embed.js" defer></script>
+  </div>
+
+  <footer class="imweb-footer">© imweb host page simulation</footer>
+</body>
+</html>

@@ -1,0 +1,22 @@
+/*
+ * card-hover.css — 밝은 카드 공통 호버.
+ * 마우스를 올리면 브랜드 퍼플 그림자가 퍼지고 테두리도 퍼플로 물든다.
+ * 색은 사이트에서 이미 쓰는 키컬러(--color-brand-accent, #857bf8) 하나만 쓴다
+ * (상담 신청 버튼 그림자·HoverEffect 하이라이트와 같은 색).
+ */
+.plt-card-hover {
+  transition:
+    box-shadow 220ms ease-out,
+    border-color 220ms ease-out;
+}
+
+.plt-card-hover:hover {
+  border-color: color-mix(in srgb, var(--color-brand-accent) 45%, transparent);
+  box-shadow: 0 0.75rem 2rem -0.5rem color-mix(in srgb, var(--color-brand-accent) 42%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plt-card-hover {
+    transition: none;
+  }
+}

@@ -1,0 +1,28 @@
+/*
+ * reveal.css — 스크롤 진입 애니메이션 (레거시 index.html의 .reveal 패턴을 재사용)
+ * Reveal 컴포넌트(hooks/use-reveal)가 IntersectionObserver로 .is-in을 토글한다.
+ */
+:where(.plt-root) {
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.plt-root .reveal {
+  opacity: 0;
+  transform: translateY(1.125rem);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+}
+
+.plt-root .reveal.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plt-root .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

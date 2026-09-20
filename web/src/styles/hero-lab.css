@@ -1,0 +1,248 @@
+/*
+ * hero-lab.css — 히어로 효과 후보 A~D용 스타일 (/hero-lab 에서 비교)
+ *
+ * 원칙 (첨부 가이드 "알아두면 좋은 것"):
+ *  - 색은 전부 theme.css의 브랜드 토큰만 사용. 라이브러리 기본 파랑/보라 없음.
+ *  - 한 히어로당 화려한 요소는 하나. 서로 섞지 않는다.
+ *  - 무거운 애니메이션은 모바일(≤767px)과 reduced-motion에서 정지 → 정적 배경으로 폴백.
+ */
+
+/* ───────────────────────── 공통 ───────────────────────── */
+.plt-hero {
+  position: relative;
+  isolation: isolate; /* 배경 레이어가 헤더/다음 섹션을 침범하지 않도록 */
+  overflow: hidden;
+}
+
+/*
+ * 큰 모니터에서 히어로 상하 여백 확대.
+ *
+ * 글자 크기를 해상도와 무관하게 16px로 고정한 뒤로 히어로 높이가 628px에 묶였다. 노트북에서는
+ * 화면의 72%를 채우지만 QHD(1440)에서는 44%밖에 안 돼 위아래가 눌린 것처럼 보인다(측정).
+ * 그래서 이 구간에서만 JSX의 md:pt-64/md:pb-32(256/128px)를 1.5배로 덮는다.
+ *
+ * 높이 조건을 함께 두는 이유: 2560×1080 울트라와이드는 폭만 넓고 세로는 오히려 노트북보다
+ * 짧아서, 폭만 보고 늘리면 히어로가 화면 밖으로 밀려난다. 실제 QHD 브라우저의 뷰포트 높이는
+ * 크롬 UI를 뺀 ~1330px이라 1200 기준선에 걸린다.
+ *
+ * 이 파일이 utilities.css보다 뒤에 import되므로(index.css) 같은 명시도에서 이 규칙이 이긴다.
+ */
+@media (min-width: 2200px) and (min-height: 1200px) {
+  .plt-hero {
+    padding-top: 24rem;
+    padding-bottom: 12rem;
+  }
+}
+
+.plt-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/*
+ * 텍스트 보호막 — 배경 효과 위, 글자 아래에 끼는 한 겹.
+ * 제목·본문이 왼쪽에 있으므로 왼쪽을 진하게, 오른쪽(버튼)으로 갈수록 옅게.
+ * 캔버스색이라 효과가 '가려지는' 게 아니라 '멀어지는' 것처럼 보인다.
+ */
+.plt-hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-brand-canvas) 72%, transparent) 0%,
+    color-mix(in srgb, var(--color-brand-canvas) 55%, transparent) 45%,
+    color-mix(in srgb, var(--color-brand-canvas) 20%, transparent) 75%,
+    transparent 100%
+  );
+}
+
+/* ──────────────────── A. 오로라 (CSS 전용) ──────────────────── */
+.plt-aurora {
+  background-color: var(--color-brand-canvas);
+}
+
+.plt-aurora__blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.55;
+  will-change: transform;
+}
+
+.plt-aurora__blob--purple {
+  top: -18%;
+  right: -8%;
+  width: 46vw;
+  height: 46vw;
+  max-width: 620px;
+  max-height: 620px;
+  background: radial-gradient(circle, var(--color-gero-purple) 0%, transparent 68%);
+  animation: plt-drift-a 22s ease-in-out infinite alternate;
+}
+
+.plt-aurora__blob--teal {
+  bottom: -26%;
+  left: -10%;
+  width: 52vw;
+  height: 52vw;
+  max-width: 680px;
+  max-height: 680px;
+  background: radial-gradient(circle, var(--color-gero-purple-deep) 0%, transparent 68%);
+  animation: plt-drift-b 28s ease-in-out infinite alternate;
+}
+
+.plt-aurora__blob--lime {
+  top: 24%;
+  left: 38%;
+  width: 30vw;
+  height: 30vw;
+  max-width: 380px;
+  max-height: 380px;
+  opacity: 0.3; /* 가장 밝은 단계라 낮게 */
+  background: radial-gradient(circle, var(--color-gero-purple-light) 0%, transparent 70%);
+  animation: plt-drift-c 34s ease-in-out infinite alternate;
+}
+
+@keyframes plt-drift-a {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-8%, 10%, 0) scale(1.15);
+  }
+}
+
+@keyframes plt-drift-b {
+  from {
+    transform: translate3d(0, 0, 0) scale(1.1);
+  }
+  to {
+    transform: translate3d(12%, -8%, 0) scale(1);
+  }
+}
+
+@keyframes plt-drift-c {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-14%, -12%, 0);
+  }
+}
+
+/* ─────────────── B. 그리드 + 커서 스포트라이트 ─────────────── */
+.plt-spotlight {
+  background-color: var(--color-brand-canvas);
+}
+
+/* 격자: 브랜드 라인 색으로만 — 회색 격자를 쓰면 다른 사이트처럼 보인다 */
+.plt-spotlight__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--color-brand-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-brand-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  /* 가장자리로 갈수록 격자가 사라져야 '깔아놓은 판' 느낌이 안 난다 */
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 100%);
+}
+
+.plt-spotlight__glow {
+  position: absolute;
+  inset: 0;
+  /* --mx/--my는 JS가 pointermove로 채운다. 없으면 중앙 상단 고정 */
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 35%),
+    color-mix(in srgb, var(--color-gero-purple) 26%, transparent) 0%,
+    color-mix(in srgb, var(--color-gero-purple-deep) 12%, transparent) 42%,
+    transparent 72%
+  );
+  transition: background 220ms ease-out;
+}
+
+/* ────────────── C. 분자 네트워크 (canvas) ────────────── */
+.plt-particles {
+  background-color: var(--color-brand-canvas);
+}
+
+.plt-particles__canvas {
+  display: block; /* preflight를 안 쓰므로 canvas는 기본 inline — 하단 여백 방지 */
+  width: 100%;
+  height: 100%;
+}
+
+/* canvas를 못 띄우는 상황(모바일·reduced-motion)의 정적 폴백 */
+.plt-particles__fallback {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 50% at 82% 8%, color-mix(in srgb, var(--color-gero-purple) 22%, transparent), transparent 70%),
+    radial-gradient(55% 45% at 6% 92%, color-mix(in srgb, var(--color-gero-purple-deep) 20%, transparent), transparent 70%);
+}
+
+/* ────────── D. 절제형 — 정적 배경 + 헤드라인 그라디언트 스윕 ────────── */
+.plt-calm {
+  background-color: var(--color-brand-canvas);
+  background-image:
+    radial-gradient(48% 40% at 88% -4%, color-mix(in srgb, var(--color-gero-purple) 20%, transparent), transparent 70%),
+    radial-gradient(42% 38% at -6% 100%, color-mix(in srgb, var(--color-gero-purple-deep) 16%, transparent), transparent 70%);
+}
+
+.plt-calm__headline {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-brand-ink) 0%,
+    var(--color-brand-ink) 32%,
+    var(--color-gero-purple) 46%,
+    var(--color-gero-purple-deep) 54%,
+    var(--color-brand-ink) 68%,
+    var(--color-brand-ink) 100%
+  );
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: plt-sweep 7s ease-in-out 0.6s infinite;
+}
+
+@keyframes plt-sweep {
+  0% {
+    background-position: 100% 0;
+  }
+  55%,
+  100% {
+    background-position: 0% 0;
+  }
+}
+
+/* ─────────── 모바일 · 저사양 · 접근성 가드 ─────────── */
+/* 가이드: "무거운 건 모바일에서 빼세요" — 움직임만 끄고 색감은 남긴다 */
+@media (max-width: 767px) {
+  .plt-aurora__blob {
+    animation: none;
+    filter: blur(60px); /* 모바일 GPU에서 80px 블러는 스크롤을 끊는다 */
+  }
+
+  .plt-spotlight__grid {
+    background-size: 40px 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plt-aurora__blob,
+  .plt-calm__headline {
+    animation: none;
+  }
+
+  .plt-calm__headline {
+    background-image: none;
+    color: var(--color-brand-ink);
+  }
+
+  .plt-spotlight__glow {
+    transition: none;
+  }
+}

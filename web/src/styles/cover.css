@@ -1,0 +1,90 @@
+/*
+ * cover.css — Cover(제목 속 구절 박스)의 호버 효과 키프레임.
+ * 빛줄기·반짝임·글자 떨림은 모두 .plt-cover:hover 에서만 돈다.
+ */
+.plt-cover__beam {
+  position: absolute;
+  left: 0;
+  height: 1px;
+  width: 40%;
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.plt-cover__spark {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 9999px;
+  background: #fff;
+  opacity: 0;
+}
+
+.plt-cover:hover .plt-cover__beam {
+  animation: plt-cover-beam linear infinite;
+}
+
+.plt-cover:hover .plt-cover__spark {
+  animation: plt-cover-spark 1.4s ease-in-out infinite;
+}
+
+.plt-cover:hover .plt-cover__text {
+  animation: plt-cover-jitter 0.25s steps(2) infinite;
+}
+
+/* 왼쪽 밖에서 오른쪽 밖으로 */
+@keyframes plt-cover-beam {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(250%);
+    opacity: 0;
+  }
+}
+
+@keyframes plt-cover-spark {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 원본의 x: [0, -1, 1, 0] 떨림 */
+@keyframes plt-cover-jitter {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-1px, 0.5px);
+  }
+  50% {
+    transform: translate(1px, -0.5px);
+  }
+  75% {
+    transform: translate(-0.5px, -0.5px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plt-cover:hover .plt-cover__beam,
+  .plt-cover:hover .plt-cover__spark,
+  .plt-cover:hover .plt-cover__text {
+    animation: none;
+  }
+}
