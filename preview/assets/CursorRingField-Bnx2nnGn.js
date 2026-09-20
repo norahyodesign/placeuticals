@@ -1,4 +1,4 @@
-import{n as e,r as t,t as n}from"./index-BgPmmOE8.js";var r=t(e(),1),i=n(),a=500,o=a/2,s=5,c=.175,l=.01,u=.01,d=40,f=1.5,p=65536,m=Math.PI*2,h=5,g=[`#7189ff`,`#3074f9`,`#0b0b18`],_=4,v=`
+import{n as e,r as t,t as n}from"./index-DROShBhm.js";var r=t(e(),1),i=n(),a=500,o=a/2,s=5,c=.175,l=.01,u=.01,d=40,f=1.5,p=65536,m=Math.PI*2,h=5,g=[`#7189ff`,`#3074f9`,`#0b0b18`],_=4,v=`
 vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
 vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}
 vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}
